@@ -1,0 +1,36 @@
+<table id="apache_access_table" class="table table-hover">
+  <thead>
+    <tr>
+      <th>server_name</th>
+      <th>path</th>
+      <th>code</th>
+      <th>host</th>
+      <th>vhost</th>
+      <th>method</th>
+      <th>time</th>
+      <th>user</th>
+      <th>referer</th>
+      <th>agent</th>
+      <th>forwarded</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @logs.each do |log| -%>
+      <tr>
+        <td><%= log.server_name %></td>
+        <td><%= log.path %></td>
+        <td><%= log.code %></td>
+        <td><%= log.host %></td>
+        <td><%= log.vhost %></td>
+        <td><%= log.method %></td>
+        <td><%= log.time %></td>
+        <td><%= log.user %></td>
+        <td><%= log.referer %></td>
+        <td><%= log.agent %></td>
+        <td><%= log.forwarded %></td>
+        <td><%= log.size %></td>
+      </tr>
+    <%- end -%>
+  </tbody>
+</table>

@@ -1,0 +1,32 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>server_name</th>
+      <th>time</th>
+      <th>user</th>
+      <th>host</th>
+      <th>host_ip</th>
+      <th>query_time</th>
+      <th>lock_time</th>
+      <th>rows_sent</th>
+      <th>rows_examined</th>
+      <th>sql</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @logs.each do |log| -%>
+      <tr>
+        <td><%= log.server_name %></td>
+        <td><%= p log.time %></td>
+        <td><%= log.user %></td>
+        <td><%= log.host %></td>
+        <td><%= log.host_ip %></td>
+        <td><%= log.query_time %></td>
+        <td><%= log.lock_time %></td>
+        <td><%= log.rows_sent %></td>
+        <td><%= log.rows_examined %></td>
+        <td><%= log.sql %></td>
+      </tr>
+    <%- end -%>
+  </tbody>
+</table>
