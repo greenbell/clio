@@ -1,3 +1,55 @@
 <h1>mysql.slow</h1>
-<%= render "layouts/daytime_picker" %>
-<%= render "table" %>
+<div class="panel panel-default">
+  <a data-toggle="collapse" data-parent="#accordion" href="#finder">検索条件</a>
+  <div id="finder" class="panel-collapse collapse">
+    <%= form_tag "mysql_slow", :class => "form", :role => "form", :method => "GET" do |f| %>
+      <%= render "layouts/daytime_picker" %><br>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "d-date" %>
+        日時の降順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "a-date" %>
+        日時の昇順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "d-query" %>
+        クエリタイムの降順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "a-query" %>
+        クエリタイムの昇順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "d-lock" %>
+        ロックタイムの降順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "a-lock" %>
+        ロックタイムの昇順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "a-exam" %>
+        処理行数の昇順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "d-exam" %>
+        処理行数の降順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "a-sent" %>
+        送信行数の昇順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "d-sent" %>
+        送信行数の降順
+      </label>
+      <button type="submit" class="btn btn-default">送信</button>
+    <% end %>
+  </div>
+</div>
+<% if @logs %>
+  <%= render "table" %>
+<% else %>
+  該当するログがありませんでした
+<% end %>
