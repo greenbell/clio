@@ -1,3 +1,27 @@
 <h1>apache.access</h1>
-<%= render "layouts/daytime_picker" %>
+<div class="panel panel-default">
+  <a data-toggle="collapse" data-parent="#accordion" href="#finder">検索条件</a>
+  <div id="finder" class="panel-collapse collapse">
+    <%= form_tag "apache_access", :class => "form", :role => "form", :method => "GET" do |f| %>
+      <%= render "layouts/daytime_picker" %><br>
+      <label>
+        ステータスコード:
+        <%= select_tag :code, options_for_select([["全て", "all"], ["200", "ok"], ["200以外", "not_ok"]]), :class => "form-control", :selected => @code %>
+      </label>
+      <label>
+        HTTPメソッド:
+        <%= select_tag :method, options_for_select([["全て", "all"], ["GET", "get"], ["POST", "post"], ["PUT", "put"], ["DELETE", "delete"]]), :class => "form-control", :selected => @method %>
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "d-date" %>
+        日時の降順
+      </label>
+      <label class="radio-inline">
+        <%= radio_button_tag "sort", "a-date" %>
+        日時の昇順
+      </label>
+      <button type="submit" class="btn btn-default">送信</button>
+    <% end %>
+  </div>
+</div>
 <%= render "table" %>

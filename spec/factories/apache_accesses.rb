@@ -14,7 +14,17 @@ FactoryGirl.define do
     forwarded { Faker::Internet.ip_v4_address }
     server_name { Faker::Lorem.word }
     after(:build) do |log, evaluator|
-      log.method = 200
+      log.method = "GET"
+    end
+
+    trait :not_found do
+      code 404
+    end
+
+    trait :post do
+      after(:build) do |log, evaluator|
+        log.method = "POST"
+      end
     end
   end
 end
