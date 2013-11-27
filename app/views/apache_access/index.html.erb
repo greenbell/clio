@@ -24,4 +24,8 @@
     <% end %>
   </div>
 </div>
-<%= render "table" %>
+<% if @logs %>
+  <%= render "table" %>
+<% else %>
+  該当するログがありませんでした
+<% end %>
