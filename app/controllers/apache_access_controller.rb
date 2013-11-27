@@ -7,38 +7,12 @@ class ApacheAccessController < ApplicationController
     @logs = ApacheAccess.where(:time.gt => @start, :time.lt => @end)
 
     @code = (params[:code])? params[:code]: "all"
-    @logs =
-    case @code
-      when "all"
-        @logs
-      when "ok"
-        @logs.ok
-      when "not_ok"
-        @logs.not_ok
-    end     
+    @logs = @logs.code_filter(@code)
 
     @method = (params[:method])? params[:method]: "all"
-    @logs =
-    case @method
-      when "all"
-        @logs
-      when "get"
-        @logs.get
-      when "post"
-        @logs.post
-      when "put"
-        @logs.put
-      when "delete"
-        @logs.delete
-    end
+    @logs = @logs.method_filter(@method)
         
     @sort = (params[:sort])? params[:sort]: "d-time"
-    @logs = 
-    case @sort
-    when "d-time"
-      @logs.desc(:time)
-    when "a-time"
-      @logs.asc(:time) 
-    end
+    @logs = @logs.sort_chooser(@sort)
   end
 end
