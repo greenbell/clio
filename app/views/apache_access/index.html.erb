@@ -30,9 +30,9 @@
   <% end %>
 <% end %>
 <% if @logs %>
-  <%= will_paginate @logs %>
+  <%= paginate @logs %>
   <%= render "table" %>
-  <%= will_paginate @logs %>
+  <%= paginate @logs %>
 <% else %>
   該当するログがありませんでした
 <% end %>
