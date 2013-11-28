@@ -14,6 +14,11 @@
     <% end %>
   </div>
 </div>
+<% if params[:filter] %>
+  <% params[:filter].each do |item, value| %>
+    <button type="button" class="btn btn-default" onclick="exec_filter('mysql_slow_form', '<%= item %>','')"><%= item %>: <%= value %> <i class="icon-remove-sign"></i></button>
+  <% end %>
+<% end %>
 <% if @logs %>
   <%= will_paginate @logs %>
   <%= render "table" %>
