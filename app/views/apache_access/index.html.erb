@@ -6,13 +6,13 @@
       <%= render "layouts/daytime_picker" %><br>
       <label>
         ステータスコード:
-        <%= select_tag :code, options_for_select([["全て", "all"], ["200", "ok"], ["200以外", "not_ok"]]), :class => "form-control", :selected => @code %>
+        <%= select_tag :code, options_for_select([["全て", ""], ["200", "ok"], ["200以外", "not_ok"]]), :class => "form-control", :selected => (params[:code])? params[:code]: "" %>
       </label>
       <label>
         HTTPメソッド:
-        <%= select_tag :method, options_for_select([["全て", "all"], ["GET", "get"], ["POST", "post"], ["PUT", "put"], ["DELETE", "delete"]]), :class => "form-control", :selected => @method %>
+        <%= select_tag :method, options_for_select([["全て", ""], ["GET", "get"], ["POST", "post"], ["PUT", "put"], ["DELETE", "delete"]]), :class => "form-control", :selected => (params[:method])? params[:method]: "" %>
       </label>
-      <%= hidden_field_tag "sort", @sort %>
+      <%= hidden_field_tag "sort", (params[:sort])? params[:sort]: "" %>
 
       <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
       <%= hidden_field_tag "filter[host]", (params[:filter])? params[:filter][:host]: "" %>

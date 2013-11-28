@@ -1,12 +1,12 @@
 <div id="startdate" class="input-append date">
-  <%= text_field_tag :start, @start %>
+  <%= text_field_tag :start, (params[:start])? params[:start]: (DateTime.now - 1.month).strftime("%Y/%m/%d %H:%M:%S") %>
   <span class="add-on">
     <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
   </span>
 </div>
 ~
 <div id="enddate" class="input-append date">
-  <%= text_field_tag :end, @end %>
+  <%= text_field_tag :end, (params[:end])? params[:end]: DateTime.now.strftime("%Y/%m/%d %H:%M:%S") %>
   <span class="add-on">
     <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
   </span>

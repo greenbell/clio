@@ -12,10 +12,14 @@ class MysqlSlow
   field :rows_examined
   field :sql
 
+  scope :time_filter, lambda {|start_time, end_time|
+    start_time = (DateTime.now - 1.month).strftime("%Y/%m/%d %H:%M:%S") unless start_time
+    end_time = DateTime.now.strftime("%Y/%m/%d %H:%M:%S") unless end_time
+    self.where(:time.gt => start_time, :time.lt => end_time)
+  }
+
   scope :sort_chooser, lambda {|param|
     case param
-    when "d-time"
-      self.desc(:time)
     when "a-time"
       self.asc(:time) 
     when "d-query_time"
@@ -34,6 +38,8 @@ class MysqlSlow
       self.desc(:rows_sent)
     when "a-rows_sent"
       self.asc(:rows_sent)
+    else
+      self.desc(:time)
     end
   }
 end

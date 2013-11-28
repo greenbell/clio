@@ -14,6 +14,12 @@ class ApacheAccess
   field :forwarded
   field :server_name
 
+  scope :time_filter, lambda {|start_time, end_time|
+    start_time = (DateTime.now - 1.month).strftime("%Y/%m/%d %H:%M:%S") unless start_time
+    end_time = DateTime.now.strftime("%Y/%m/%d %H:%M:%S") unless end_time
+    self.where(:time.gt => start_time, :time.lt => end_time)
+  }
+
   scope :value_filter, lambda {|params|
     if params
       params.delete_if {|key, value| value == ""}
@@ -26,13 +32,13 @@ class ApacheAccess
   scope :ok, -> { where(:code => 200) }
   scope :not_ok, -> { where(:code.ne => 200) }
   scope :code_filter, lambda {|param|
-    case param 
-    when "all"
-      nil
+    case param
     when "ok"
       self.ok
     when "not_ok"
       self.not_ok
+    else
+      nil
     end     
   }
 
@@ -42,8 +48,6 @@ class ApacheAccess
   scope :delete, -> { where(:method => "DELETE") }
   scope :method_filter, lambda {|param|
     case param
-    when "all"
-      nil
     when "get"
       self.get
     when "post"
@@ -52,19 +56,21 @@ class ApacheAccess
       self.put
     when "delete"
       self.delete
+    else
+      nil
     end
   }
 
   scope :sort_chooser, lambda {|param|
     case param
-    when "d-time"
-      self.desc(:time)
     when "a-time"
       self.asc(:time)
     when "d-size"
       self.desc(:size)
     when "a-size"
       self.asc(:size)
+    else
+      self.desc(:time)
     end
   }
 end
