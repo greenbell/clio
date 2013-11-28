@@ -4,7 +4,7 @@ class ApacheAccessController < ApplicationController
   def index
     @start = (params[:start])? params[:start]: (DateTime.now - 1.month).strftime("%Y/%m/%d %H:%M:%S")
     @end = (params[:end])? params[:end]: DateTime.now.strftime("%Y/%m/%d %H:%M:%S")
-    @logs = ApacheAccess.where(:time.gt => @start, :time.lt => @end)
+    @logs = ApacheAccess.where(:time.gt => @start, :time.lt => @end).value_filter(params[:filter])
 
     @code = (params[:code])? params[:code]: "all"
     @logs = @logs.code_filter(@code)

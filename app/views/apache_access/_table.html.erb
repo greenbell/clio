@@ -18,17 +18,17 @@
   <tbody>
     <%- @logs.each do |log| -%>
       <tr>
-        <td><%= log.server_name %></td>
-        <td><%= log.path %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "server_name", :value => log.server_name %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "path", :value => log.path %></td>
         <td><%= log.code %></td>
-        <td><%= log.host %></td>
-        <td><%= log.vhost %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "host", :value => log.host %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "vhost", :value => log.vhost %></td>
         <td><%= log.method %></td>
         <td><%= log.time %></td>
-        <td><%= log.user %></td>
-        <td><%= log.referer %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "host", :value => log.user %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "host", :value => log.referer %></td>
         <td><%= log.agent %></td>
-        <td><%= log.forwarded %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "host", :value => log.forwarded %></td>
         <td><%= log.size %></td>
       </tr>
     <%- end -%>

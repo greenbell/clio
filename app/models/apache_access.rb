@@ -14,6 +14,15 @@ class ApacheAccess
   field :forwarded
   field :server_name
 
+  scope :value_filter, lambda {|params|
+    if params
+      params.delete_if {|key, value| value == ""}
+      self.where(params)
+    else
+      nil
+    end
+  }
+
   scope :ok, -> { where(:code => 200) }
   scope :not_ok, -> { where(:code.ne => 200) }
   scope :code_filter, lambda {|param|

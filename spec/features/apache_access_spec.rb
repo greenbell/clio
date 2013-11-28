@@ -67,5 +67,18 @@ describe 'apache_access' do
         end
       end
     end
+
+    context "when filtered by server_name" do
+      let(:log) { create(:apache_access) }
+      let(:path) { apache_access_index_path(:"filter[server_name]" => log.server_name, :"filter[host]" => "") }
+      it "shows only logs whose server_name is specified" do
+        dummy = create(:apache_access)
+        visit path
+        within(:css, "#apache_access_table") do
+          should have_text(format_log(log))
+          should_not have_text(format_log(dummy))
+        end
+      end
+    end
   end
 end

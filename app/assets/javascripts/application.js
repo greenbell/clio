@@ -17,6 +17,11 @@
 //= require_tree .
 
 function exec_sort(form, order) {
-  $("#"+form+" input[name=sort]").val(order);
+  $("#"+form+" input[name='sort']").val(order);
+  $("#"+form).submit();
+}
+
+function exec_filter(form, item, value) {
+  $("#"+form+" input[name='filter["+item+"]']").val(value);
   $("#"+form).submit();
 }

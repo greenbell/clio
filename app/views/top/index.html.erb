@@ -1,7 +1,13 @@
 <h1>Overview</h1>
 <h2><a href="apache_access">apache.access</a></h2>
 <%= form_tag "apache_access", :id => "apache_access_form", :class => "form", :role => "form", :method => "GET" do |f| %>
-  <%= hidden_field_tag "sort", @sort %>
+  <%= hidden_field_tag "sort" %>
+  <%= hidden_field_tag "filter[server_name]" %>
+  <%= hidden_field_tag "filter[host]" %>
+  <%= hidden_field_tag "filter[vhost]" %>
+  <%= hidden_field_tag "filter[user]" %>
+  <%= hidden_field_tag "filter[referer]" %>
+  <%= hidden_field_tag "filter[path]" %>
 <% end %>
 <%= render "apache_access/table", :@logs => @apache_access_logs, :@sort => "d-time" %>
 
