@@ -1,6 +1,12 @@
 <h1>Overview</h1>
 <h2><a href="apache_access">apache.access</a></h2>
-<%= render "apache_access/table", :@logs => @apache_access_logs %>
+<%= form_tag "apache_access", :id => "apache_access_form", :class => "form", :role => "form", :method => "GET" do |f| %>
+  <%= hidden_field_tag "sort", @sort %>
+<% end %>
+<%= render "apache_access/table", :@logs => @apache_access_logs, :@sort => "d-time" %>
 
 <h2><a href="mysql_slow">mysql.slow</a></h2>
-<%= render "mysql_slow/table", :@logs => @mysql_slow_logs %>
+<%= form_tag "mysql_slow", :id => "mysql_slow_form", :class => "form", :role => "form", :method => "GET" do |f| %>
+  <%= hidden_field_tag "sort", @sort %>
+<% end %>
+<%= render "mysql_slow/table", :@logs => @mysql_slow_logs, :@sort => "d-time" %>

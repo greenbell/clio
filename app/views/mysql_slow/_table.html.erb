@@ -2,14 +2,14 @@
   <thead>
     <tr>
       <th>server_name</th>
-      <th>time</th>
+      <th><%= render "layouts/sortable_table_head", :form => "mysql_slow_form", :item => "time" %></th>
       <th>user</th>
       <th>host</th>
       <th>host_ip</th>
-      <th>query_time</th>
-      <th>lock_time</th>
-      <th>rows_sent</th>
-      <th>rows_examined</th>
+      <th><%= render "layouts/sortable_table_head", :form => "mysql_slow_form", :item => "query_time" %></th>
+      <th><%= render "layouts/sortable_table_head", :form => "mysql_slow_form", :item => "lock_time" %></th>
+      <th><%= render "layouts/sortable_table_head", :form => "mysql_slow_form", :item => "rows_sent" %></th>
+      <th><%= render "layouts/sortable_table_head", :form => "mysql_slow_form", :item => "rows_examined" %></th>
       <th>sql</th>
     </tr>
   </thead>

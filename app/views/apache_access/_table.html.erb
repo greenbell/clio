@@ -7,12 +7,12 @@
       <th>host</th>
       <th>vhost</th>
       <th>method</th>
-      <th>time</th>
+      <th><%= render "layouts/sortable_table_head", :form => "apache_access_form", :item => "time" %></th>
       <th>user</th>
       <th>referer</th>
       <th>agent</th>
       <th>forwarded</th>
-      <th>size</th>
+      <th><%= render "layouts/sortable_table_head", :form => "apache_access_form", :item => "size" %></th>
     </tr>
   </thead>
   <tbody>

@@ -18,21 +18,21 @@ class MysqlSlow
       self.desc(:time)
     when "a-time"
       self.asc(:time) 
-    when "d-query"
+    when "d-query_time"
       self.desc(:query_time)
-    when "a-query"
+    when "a-query_time"
       self.asc(:query_time) 
-    when "d-lock"
+    when "d-lock_time"
       self.desc(:lock_time)
-    when "a-lock"
+    when "a-lock_time"
       self.asc(:lock_time) 
-    when "d-exam"
+    when "d-rows_examined"
       self.desc(:rows_examined)
-    when "a-exam"
+    when "a-rows_examined"
       self.asc(:rows_examined) 
-    when "d-sent"
+    when "d-rows_sent"
       self.desc(:rows_sent)
-    when "a-sent"
+    when "a-rows_sent"
       self.asc(:rows_sent)
     end
   }

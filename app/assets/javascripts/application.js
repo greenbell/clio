@@ -15,3 +15,8 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+function exec_sort(form, order) {
+  $("#"+form+" input[name=sort]").val(order);
+  $("#"+form).submit();
+}

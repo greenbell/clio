@@ -1,11 +1,10 @@
 # coding: utf-8
 require 'spec_helper'
 
-def format_log(log)
-  "#{log.server_name} #{log.path} #{log.code} #{log.host} #{log.vhost} #{log.method} #{log.time} #{log.user} #{log.referer} #{log.agent} #{log.forwarded} #{log.size}"
-end
-
 describe 'apache_access' do
+  def format_log(log)
+    "#{log.server_name} #{log.path} #{log.code} #{log.host} #{log.vhost} #{log.method} #{log.time} #{log.user} #{log.referer} #{log.agent} #{log.forwarded} #{log.size}"
+  end
   subject { page }
 
   describe '#index' do

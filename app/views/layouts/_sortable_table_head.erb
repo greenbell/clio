@@ -1,0 +1,12 @@
+<div class="dropdown">
+  <% if @sort == "a-#{item}" %>
+    <i class="icon-sort-by-attributes"></i>
+  <% elsif @sort == "d-#{item}" %>
+    <i class="icon-sort-by-attributes-alt"></i>
+  <% end %>
+  <a data-toggle="dropdown" href="#"><%= item %></a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="exec_sort('<%= form %>', 'a-<%= item %>')">昇順</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="exec_sort('<%= form %>', 'd-<%= item %>')">降順</a></li>
+  </ul>
+</div>

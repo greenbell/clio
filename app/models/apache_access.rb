@@ -52,6 +52,10 @@ class ApacheAccess
       self.desc(:time)
     when "a-time"
       self.asc(:time)
+    when "d-size"
+      self.desc(:size)
+    when "a-size"
+      self.asc(:size)
     end
   }
 end
