@@ -7,5 +7,6 @@ class ApacheAccessController < ApplicationController
                         .code_filter(params[:code])
                         .method_filter(params[:method])
                         .sort_chooser(params[:sort])
+                        .paginate(:page => params[:page], :per_page => 30)
   end
 end
