@@ -70,7 +70,7 @@ describe 'apache_access' do
 
     context "when filtered by server_name" do
       let(:log) { create(:apache_access) }
-      let(:path) { apache_access_index_path(:"filter[server_name]" => log.server_name, :"filter[host]" => "") }
+      let(:path) { apache_access_index_path(:"filter[server_name]" => log.server_name) }
       it "shows only logs whose server_name is specified" do
         dummy = create(:apache_access)
         visit path

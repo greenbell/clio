@@ -27,5 +27,18 @@ describe 'mysql_slow' do
         end
       end
     end
+
+    context "when filtered by host" do
+      let(:log) { create(:mysql_slow) }
+      let(:path) { mysql_slow_index_path(:"filter[host]" => log.host) }
+      it "shows only logs whose host is specified" do
+        dummy = create(:mysql_slow)
+        visit path
+        within(:css, "#mysql_slow_table") do
+          should have_text(format_log(log))
+          should_not have_text(format_log(dummy))
+        end
+      end
+    end
   end
 end

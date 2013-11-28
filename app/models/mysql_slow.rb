@@ -18,6 +18,15 @@ class MysqlSlow
     self.where(:time.gt => start_time, :time.lt => end_time)
   }
 
+  scope :value_filter, lambda {|params|
+    if params
+      params.delete_if {|key, value| value == ""}
+      self.where(params)
+    else
+      nil
+    end
+  }
+
   scope :sort_chooser, lambda {|param|
     case param
     when "a-time"
