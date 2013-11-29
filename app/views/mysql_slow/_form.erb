@@ -1,0 +1,15 @@
+<%= form_tag "mysql_slow", :id => "mysql_slow_form", :class => "form", :role => "form", :method => "GET" do |f| %>
+  <%= render "layouts/daytime_picker" %><br>
+  <%= hidden_field_tag "sort", @sort %>
+
+  <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
+  <%= hidden_field_tag "filter[host]", (params[:filter])? params[:filter][:host]: "" %>
+  <%= hidden_field_tag "filter[host_ip]", (params[:filter])? params[:filter][:host_ip]: "" %>
+  <%= hidden_field_tag "filter[user]", (params[:filter])? params[:filter][:user]: "" %>
+  <button type="submit" class="btn btn-default">送信</button>
+<% end %>
+<% if params[:filter] %>
+  <% params[:filter].each do |item, value| %>
+    <button type="button" class="btn btn-default" onclick="exec_filter('mysql_slow_form', '<%= item %>','')"><%= item %>: <%= value %> <i class="icon-remove-sign"></i></button>
+  <% end %>
+<% end %>
