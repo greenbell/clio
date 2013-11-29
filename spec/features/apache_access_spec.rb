@@ -14,6 +14,14 @@ describe 'apache_access' do
       visit path
       find("#apache_access_table > tbody").should have_text(format_log(log))
     end
+
+    it "paginates exactly" do
+      logs = create_list(:apache_access, 31)
+      logs.sort_by! {|log| DateTime.now - log.time}
+      visit apache_access_index_path(:page => 2)
+      find("#apache_access_table > tbody").should have_text(format_log(logs[-1]))
+      all(".pagination").first.should have_text("« First ‹ Prev 1 2")
+    end
     
     context "when specified code 200" do
       let(:path) { apache_access_index_path(:code => "ok") }
@@ -57,9 +65,7 @@ describe 'apache_access' do
     context "when sorted by asc of datetime" do
       let(:path) { apache_access_index_path(:sort => "a-time")}
       it "shows logs with sorted by asc of datetime" do
-        logs = 5.times.map {
-          create(:apache_access)
-        }
+        logs = create_list(:apache_access, 5)
         logs.sort_by! {|log| log.time}
         visit path
         logs.each_with_index do |log, i|

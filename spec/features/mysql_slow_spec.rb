@@ -14,12 +14,19 @@ describe 'mysql_slow' do
       visit path
       find("#mysql_slow_table > tbody").should have_text(format_log(log))
     end
+
+    it "paginates exactly" do
+      logs = create_list(:mysql_slow, 31)
+      logs.sort_by! {|log| DateTime.now - log.time}
+      visit mysql_slow_index_path(:page => 2)
+      find("#mysql_slow_table > tbody").should have_text(format_log(logs[-1]))
+      all(".pagination").first.should have_text("« First ‹ Prev 1 2")
+    end
+
     context "when sorted by asc of lock_time" do
       let(:path) { mysql_slow_index_path(:sort => "a-lock_time") }
       it "shows logs with sorted by asc of lock_time" do
-        logs = 5.times.map {
-          create(:mysql_slow)
-        }
+        logs = create_list(:mysql_slow, 5)
         logs.sort_by! {|log| log.lock_time }
         visit path
         logs.each_with_index do |log, i|
