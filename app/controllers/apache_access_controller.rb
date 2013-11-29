@@ -2,7 +2,7 @@
 
 class ApacheAccessController < ApplicationController
   def index
-    @logs = ApacheAccess.time_filter(params[:start], params[:end])
+    @logs = ApacheAccess.date_filter(params[:date])
                         .value_filter(params[:filter])
                         .code_filter(params[:code])
                         .method_filter(params[:method])

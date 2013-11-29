@@ -10,5 +10,9 @@ FactoryGirl.define do
     rows_sent { Faker::Number.number(2) }
     rows_examined { Faker::Number.number(3) }
     sql { Faker::Lorem.paragraph }
+
+    trait :today do
+      time { rand(DateTime.now.to_f - Date.today.to_time.to_f).ago }
+    end
   end
 end

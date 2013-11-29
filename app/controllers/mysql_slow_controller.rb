@@ -2,7 +2,7 @@
 
 class MysqlSlowController < ApplicationController
   def index
-    @logs = MysqlSlow.time_filter(params[:start], params[:end])
+    @logs = MysqlSlow.date_filter(params[:date])
                      .value_filter(params[:filter])
                      .sort_chooser(params[:sort])
                      .page(params[:page])

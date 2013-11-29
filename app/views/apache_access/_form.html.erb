@@ -1,5 +1,5 @@
 <%= form_tag "apache_access", :id => "apache_access_form", :class => "form", :role => "form", :method => "GET" do |f| %>
-  <%= render "layouts/daytime_picker" %><br>
+  <%= render "layouts/date_picker" %><br>
   <label>
     ステータスコード:
     <%= select_tag :code, options_for_select([["全て", ""], ["200", "ok"], ["200以外", "not_ok"]]), :class => "form-control", :selected => (params[:code])? params[:code]: "" %>
@@ -20,6 +20,6 @@
 <% end %>
 <% if params[:filter] %>
   <% params[:filter].each do |item, value| %>
-    <button type="button" class="btn btn-default" onclick="exec_filter('apache_access_form', '<%= item %>','')"><%= item %>: <%= value %> <i class="icon-remove-sign"></i></button>
+    <button type="button" class="btn btn-default" onclick="exec_filter('apache_access_form', '<%= item %>','')"><%= item %>: <%= value %> <span class="glyphicon glyphicon-remove"></span></button>
   <% end %>
 <% end %>

@@ -6,16 +6,15 @@ class MysqlSlow
   field :user
   field :host
   field :host_ip
-  field :query_time
-  field :lock_time
-  field :rows_sent
-  field :rows_examined
+  field :query_time, :type => Float
+  field :lock_time, :type => Float
+  field :rows_sent, :type => Integer
+  field :rows_examined, :type => Integer
   field :sql
 
-  scope :time_filter, lambda {|start_time, end_time|
-    start_time = (DateTime.now - 1.month).strftime("%Y/%m/%d %H:%M:%S") unless start_time
-    end_time = DateTime.now.strftime("%Y/%m/%d %H:%M:%S") unless end_time
-    self.where(:time.gt => start_time, :time.lt => end_time)
+  scope :date_filter, lambda {|date|
+    date = (date)? Date.parse(date): Date.today 
+    self.where(:time.gt => date, :time.lt => date + 1.day)
   }
 
   scope :value_filter, lambda {|params|

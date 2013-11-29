@@ -1,12 +1,12 @@
 <div class="dropdown">
   <% if params[:sort].present? %>
     <% if params[:sort] == "a-#{item}" %>
-      <i class="icon-sort-by-attributes"></i>
+      <span class="glyphicon glyphicon-sort-by-attributes"></span>
     <% elsif params[:sort] == "d-#{item}" %>
-      <i class="icon-sort-by-attributes-alt"></i>
+      <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
     <% end %>
   <% elsif item == "time" %>
-    <i class="icon-sort-by-attributes-alt"></i>
+    <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
   <% end %>
 
   <a data-toggle="dropdown" href="#"><%= item %></a>

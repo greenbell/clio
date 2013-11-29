@@ -8,16 +8,15 @@ class ApacheAccess
   field :method
   field :path
   field :code, :type => Integer
-  field :size
+  field :size, :type => Integer
   field :referer
   field :agent
   field :forwarded
   field :server_name
 
-  scope :time_filter, lambda {|start_time, end_time|
-    start_time = (DateTime.now - 1.month).strftime("%Y/%m/%d %H:%M:%S") unless start_time
-    end_time = DateTime.now.strftime("%Y/%m/%d %H:%M:%S") unless end_time
-    self.where(:time.gt => start_time, :time.lt => end_time)
+  scope :date_filter, lambda {|date|
+    date = (date)? Date.parse(date): Date.today 
+    self.where(:time.gt => date, :time.lt => date + 1.day)
   }
 
   scope :value_filter, lambda {|params|

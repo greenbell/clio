@@ -1,0 +1,10 @@
+<%= text_field_tag :date, (params[:date])? params[:date]: Date.today.strftime("%Y/%m/%d"), :id => "date_picker" %>
+<script type="text/javascript">
+  $('#date_picker').datepicker({
+    format: "yyyy/mm/dd",
+    startDate: "<%= (Date.today - 1.month).strftime("%Y/%m/%d") %>",
+    todayBtn: true,
+    language: "ja",
+    autoclose: true
+  });
+</script>
