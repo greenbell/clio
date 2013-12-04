@@ -19,8 +19,8 @@
         <td><%= render "layouts/filterable_table_item", :form => "mysql_slow_form", :item => "server_name", :value => log.server_name %></td>
         <td><%= log.time %></td>
         <td><%= render "layouts/filterable_table_item", :form => "mysql_slow_form", :item => "user", :value => log.user %></td>
-        <td><%= render "layouts/filterable_table_item", :form => "mysql_slow_form", :item => "user", :value => log.host %></td>
-        <td><%= render "layouts/filterable_table_item", :form => "mysql_slow_form", :item => "user", :value => log.host_ip %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "mysql_slow_form", :item => "host", :value => log.host %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "mysql_slow_form", :item => "host_ip", :value => log.host_ip %></td>
         <td><%= log.query_time %></td>
         <td><%= log.lock_time %></td>
         <td><%= log.rows_sent %></td>
