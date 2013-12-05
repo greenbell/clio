@@ -25,10 +25,10 @@
         <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "vhost", :value => log.vhost %></td>
         <td><%= log.method %></td>
         <td><%= log.time %></td>
-        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "host", :value => log.user %></td>
-        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "host", :value => log.referer %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "user", :value => log.user %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "referer", :value => log.referer %></td>
         <td><%= log.agent %></td>
-        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "host", :value => log.forwarded %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "apache_access_form", :item => "forwarded", :value => log.forwarded %></td>
         <td><%= log.size %></td>
       </tr>
     <%- end -%>
