@@ -1,25 +1,27 @@
-<%= form_tag "apache_access", :id => "apache_access_form", :class => "form", :role => "form", :method => "GET" do |f| %>
-  <%= render "layouts/date_picker" %><br>
-  <label>
-    ステータスコード:
-    <%= select_tag :code, options_for_select([["全て", ""], ["200", "ok"], ["200以外", "not_ok"]]), :class => "form-control", :selected => (params[:code])? params[:code]: "" %>
-  </label>
-  <label>
-    HTTPメソッド:
-    <%= select_tag :method, options_for_select([["全て", ""], ["GET", "get"], ["POST", "post"], ["PUT", "put"], ["DELETE", "delete"]]), :class => "form-control", :selected => (params[:method])? params[:method]: "" %>
-  </label>
-  <%= hidden_field_tag "sort", (params[:sort])? params[:sort]: "" %>
+<div>
+  <%= form_tag "apache_access", :id => "apache_access_form", :class => "form", :role => "form", :method => "GET" do |f| %>
+    <%= render "layouts/date_picker" %><br>
+    <label>
+      ステータスコード:
+      <%= select_tag :code, options_for_select([["全て", ""], ["200", "ok"], ["200以外", "not_ok"]]), :class => "form-control", :selected => (params[:code])? params[:code]: "" %>
+    </label>
+    <label>
+      HTTPメソッド:
+      <%= select_tag :method, options_for_select([["全て", ""], ["GET", "get"], ["POST", "post"], ["PUT", "put"], ["DELETE", "delete"]]), :class => "form-control", :selected => (params[:method])? params[:method]: "" %>
+    </label>
+    <%= hidden_field_tag "sort", (params[:sort])? params[:sort]: "" %>
 
-  <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
-  <%= hidden_field_tag "filter[host]", (params[:filter])? params[:filter][:host]: "" %>
-  <%= hidden_field_tag "filter[vhost]", (params[:filter])? params[:filter][:vhost]: "" %>
-  <%= hidden_field_tag "filter[user]", (params[:filter])? params[:filter][:user]: "" %>
-  <%= hidden_field_tag "filter[referer]", (params[:filter])? params[:filter][:referer]: "" %>
-  <%= hidden_field_tag "filter[path]", (params[:filter])? params[:filter][:path]: "" %>
-  <button type="submit" class="btn btn-default">送信</button>
-<% end %>
-<% if params[:filter] %>
-  <% params[:filter].each do |item, value| %>
-    <button type="button" class="btn btn-default" onclick="exec_filter('apache_access_form', '<%= item %>','')"><%= item %>: <%= value %> <span class="glyphicon glyphicon-remove"></span></button>
+    <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
+    <%= hidden_field_tag "filter[host]", (params[:filter])? params[:filter][:host]: "" %>
+    <%= hidden_field_tag "filter[vhost]", (params[:filter])? params[:filter][:vhost]: "" %>
+    <%= hidden_field_tag "filter[user]", (params[:filter])? params[:filter][:user]: "" %>
+    <%= hidden_field_tag "filter[referer]", (params[:filter])? params[:filter][:referer]: "" %>
+    <%= hidden_field_tag "filter[path]", (params[:filter])? params[:filter][:path]: "" %>
+    <button type="submit" class="btn btn-default">送信</button>
   <% end %>
-<% end %>
+  <% if params[:filter] %>
+    <% params[:filter].each do |item, value| %>
+      <button type="button" class="btn btn-default" onclick="exec_filter('apache_access_form', '<%= item %>','')"><%= item %>: <%= value %> <span class="glyphicon glyphicon-remove"></span></button>
+    <% end %>
+  <% end %>
+</div>
