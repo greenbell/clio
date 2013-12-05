@@ -48,6 +48,7 @@ class ApacheAccess
   scope :post, -> { where(:method => "POST") }
   scope :put, -> { where(:method => "PUT") }
   scope :delete, -> { where(:method => "DELETE") }
+  scope :options, -> { where(:method => "OPTIONS") }
   scope :method_filter, lambda {|param|
     case param
     when "get"
@@ -58,6 +59,8 @@ class ApacheAccess
       self.put
     when "delete"
       self.delete
+    when "options"
+      self.options
     else
       nil
     end
