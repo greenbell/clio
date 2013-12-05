@@ -1,6 +1,13 @@
 <div>
   <%= form_tag "apache_access", :id => "apache_access_form", :class => "form", :role => "form", :method => "GET" do |f| %>
-    <%= render "layouts/date_picker" %><br>
+    <%= text_field_tag :datetime, (params[:datetime])? params[:datetime]: DateTime.now.strftime("%Y/%m/%d %H:%M:%S"), :id => "datetime_picker" %>
+    <script type="text/javascript">
+      $(function () {
+        $('#datetime_picker').datetimepicker({
+          language: "ja",
+        });
+      });
+    </script>
     <label>
       ステータスコード:
       <%= select_tag :code, options_for_select([["全て", ""], ["200", "ok"], ["200以外", "not_ok"]]), :class => "form-control", :selected => (params[:code])? params[:code]: "" %>

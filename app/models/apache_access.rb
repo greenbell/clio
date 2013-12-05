@@ -14,11 +14,8 @@ class ApacheAccess
   field :forwarded
   field :server_name
 
-  scope :datetime_filter, lambda {|date, time|
-    now = DateTime.now
-    date = now.strftime("%Y/%m/%d") unless date
-    time = now.strftime("%H:%M:%S") unless time 
-    datetime = DateTime.parse("#{date} #{time} #{now.zone}")
+  scope :datetime_filter, lambda {|datetime|
+    datetime = (datetime)? Time.parse(datetime): Time.now
     self.where(:time.gt => datetime - 5.minute, :time.lt => datetime)
   }
 
