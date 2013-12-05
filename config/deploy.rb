@@ -24,7 +24,7 @@ namespace :deploy do
   task :restart do
     run "service unicorn_clio_clio restart"
   end
-  task :symlink do
-    run "ln -nfs #{shared_path}/config/mongoid.yml #{latest_release}/config/mongoid.yml"
-  end
+end
+after "deploy:create_symlink" do
+  run "ln -nfs #{shared_path}/config/mongoid.yml #{latest_release}/config/mongoid.yml"
 end

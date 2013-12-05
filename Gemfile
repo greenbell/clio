@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'capistrano', '~> 2.15.4'
+gem 'capistrano-ext'
 gem 'therubyracer'
 gem 'unicorn'
 group :doc do
