@@ -31,8 +31,8 @@ class ApacheAccess
     end
   }
 
-  scope :ok, -> { where(:code => 200) }
-  scope :not_ok, -> { where(:code.ne => 200) }
+  scope :ok, -> { where(:code => "200") }
+  scope :not_ok, -> { where(:code.ne => "200") }
   scope :code_filter, lambda {|param|
     case param
     when "ok"

@@ -7,7 +7,7 @@ FactoryGirl.define do
     host { Faker::Internet.ip_v4_address }
     user { Faker::Internet.user_name }
     path "/"
-    code 200
+    code "200"
     size { Faker::Number.number(3) }
     referer { Faker::Internet.url }
     agent ""
@@ -22,7 +22,7 @@ FactoryGirl.define do
     end
 
     trait :not_found do
-      code 404
+      code "404"
     end
 
     trait :post do
