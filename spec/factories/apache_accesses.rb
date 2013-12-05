@@ -17,8 +17,8 @@ FactoryGirl.define do
       log.method = "GET"
     end
 
-    trait :today do
-      time { rand(DateTime.now.to_f - Date.today.to_time.to_f).ago }
+    trait :recent do
+      time { rand(5.minute).ago }
     end
 
     trait :not_found do
