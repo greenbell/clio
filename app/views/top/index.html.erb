@@ -20,3 +20,4 @@
   <%= hidden_field_tag "filter[host_ip]" %>
 <% end %>
 <%= render "mysql_slow/table", :@logs => @mysql_slow_logs, :@sort => "d-time" %>
+<%= javascript_include_tag :top %>

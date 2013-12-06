@@ -25,7 +25,7 @@
         <td><%= log.lock_time %></td>
         <td><%= log.rows_sent %></td>
         <td><%= log.rows_examined %></td>
-        <td><%= log.sql %></td>
+        <td><pre class="brush: sql"><%= log.sql %></pre></td>
       </tr>
     <%- end -%>
   </tbody>
