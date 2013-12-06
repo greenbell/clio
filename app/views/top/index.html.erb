@@ -20,4 +20,13 @@
   <%= hidden_field_tag "filter[host_ip]" %>
 <% end %>
 <%= render "mysql_slow/table", :@logs => @mysql_slow_logs, :@sort => "d-time" %>
+
+<h2><a href="maillog">maillog</a></h2>
+<%= form_tag "maillog", :id => "maillog_form", :class => "form", :role => "form", :method => "GET" do |f| %>
+  <%= hidden_field_tag "sort" %>
+  <%= hidden_field_tag "filter[server_name]" %>
+  <%= hidden_field_tag "filter[proc_name]" %>
+  <%= hidden_field_tag "filter[proc_no]" %>
+<% end %>
+<%= render "maillog/table", :@logs => @maillog_logs, :@sort => "d-time" %>
 <%= javascript_include_tag :top %>

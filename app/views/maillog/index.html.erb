@@ -1,0 +1,10 @@
+<h1>maillog</h1>
+<%= render "form" %>
+<% if @logs %>
+  <%= paginate @logs %>
+  <%= render "table" %>
+  <%= paginate @logs %>
+<% else %>
+  該当するログがありませんでした
+<% end %>
+<%= javascript_include_tag :maillog %>
