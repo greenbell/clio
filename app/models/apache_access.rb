@@ -15,8 +15,8 @@ class ApacheAccess
   field :server_name
 
   scope :datetime_filter, lambda {|datetime|
-    datetime = (datetime)? Time.parse(datetime): Time.now
-    self.where(:time.gt => datetime - 5.minute, :time.lt => datetime)
+    datetime = (datetime)? Time.parse(datetime): Time.now - 5.minute
+    self.where(:time.gt => datetime, :time.lt => datetime + 5.minute)
   }
 
   scope :value_filter, lambda {|params|

@@ -1,13 +1,16 @@
 <div>
   <%= form_tag "apache_access", :id => "apache_access_form", :class => "form", :role => "form", :method => "GET" do |f| %>
-    <%= text_field_tag :datetime, (params[:datetime])? params[:datetime]: DateTime.now.strftime("%Y/%m/%d %H:%M:%S"), :id => "datetime_picker" %>
+    <label>
+    <%= text_field_tag :datetime, (params[:datetime])? params[:datetime]: (Time.now - 5.minute).strftime("%Y/%m/%d %H:%M"), :id => "datetime_picker" %>から5分間
+    </label>
     <script type="text/javascript">
       $(function () {
         $('#datetime_picker').datetimepicker({
           language: "ja",
+          format: "YYYY/MM/DD HH:mm"
         });
       });
-    </script>
+    </script><br>
     <label>
       ステータスコード:
       <%= select_tag :code, options_for_select([["全て", ""], ["200", "ok"], ["200以外", "not_ok"]]), :class => "form-control", :selected => (params[:code])? params[:code]: "" %>
@@ -24,6 +27,7 @@
     <%= hidden_field_tag "filter[user]", (params[:filter])? params[:filter][:user]: "" %>
     <%= hidden_field_tag "filter[referer]", (params[:filter])? params[:filter][:referer]: "" %>
     <%= hidden_field_tag "filter[path]", (params[:filter])? params[:filter][:path]: "" %>
+    <br>
     <button type="submit" class="btn btn-default">送信</button>
   <% end %>
   <% if params[:filter] %>
