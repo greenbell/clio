@@ -7,8 +7,8 @@ class ApacheAccess
   field :user
   field :method
   field :path
-  field :code, :type => Integer
-  field :size, :type => Integer
+  field :code
+  field :size
   field :referer
   field :agent
   field :forwarded
