@@ -1,6 +1,6 @@
 <div>
   <%= form_tag "mysql_slow", :id => "mysql_slow_form", :class => "form", :role => "form", :method => "GET" do |f| %>
-    <%= text_field_tag :date, (params[:date])? params[:date]: Date.today.strftime("%Y/%m/%d"), :id => "date_picker" %>
+    <%= text_field_tag :date, params[:date] || Date.today.strftime("%Y/%m/%d"), :id => "date_picker" %>
     <script type="text/javascript">
       $(function () {
         $('#date_picker').datetimepicker({

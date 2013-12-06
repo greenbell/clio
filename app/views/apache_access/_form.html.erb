@@ -1,7 +1,7 @@
 <div>
   <%= form_tag "apache_access", :id => "apache_access_form", :class => "form", :role => "form", :method => "GET" do |f| %>
     <label>
-    <%= text_field_tag :datetime, (params[:datetime])? params[:datetime]: (Time.now - 5.minute).strftime("%Y/%m/%d %H:%M"), :id => "datetime_picker" %>から5分間
+    <%= text_field_tag :datetime, params[:datetime] || (Time.now - 5.minute).strftime("%Y/%m/%d %H:%M"), :id => "datetime_picker" %>から5分間
     </label>
     <script type="text/javascript">
       $(function () {
@@ -13,13 +13,13 @@
     </script><br>
     <label>
       ステータスコード:
-      <%= select_tag :code, options_for_select([["全て", ""], ["200", "ok"], ["200以外", "not_ok"]], (params[:code])? params[:code]: ""), :class => "form-control" %>
+      <%= select_tag :code, options_for_select([["全て", ""], ["200", "ok"], ["200以外", "not_ok"]], params[:code] || ""), :class => "form-control" %>
     </label>
     <label>
       HTTPメソッド:
-      <%= select_tag :method, options_for_select([["全て", ""], ["GET", "get"], ["POST", "post"], ["PUT", "put"], ["DELETE", "delete"], ["OPTIONS", "options"]], (params[:method])? params[:method]: ""), :class => "form-control" %>
+      <%= select_tag :method, options_for_select([["全て", ""], ["GET", "get"], ["POST", "post"], ["PUT", "put"], ["DELETE", "delete"], ["OPTIONS", "options"]], params[:method] || ""), :class => "form-control" %>
     </label>
-    <%= hidden_field_tag "sort", (params[:sort])? params[:sort]: "" %>
+    <%= hidden_field_tag "sort", params[:sort] || "" %>
 
     <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
     <%= hidden_field_tag "filter[host]", (params[:filter])? params[:filter][:host]: "" %>
