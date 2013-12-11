@@ -12,8 +12,6 @@
     <%= hidden_field_tag "sort", params[:sort] || "" %>
 
     <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
-    <%= hidden_field_tag "filter[proc_name]", (params[:filter])? params[:filter][:proc_name]: "" %>
-    <%= hidden_field_tag "filter[proc_no]", (params[:filter])? params[:filter][:proc_no]: "" %>
     <%= hidden_field_tag "filter[daemon]", (params[:filter])? params[:filter][:daemon]: "" %>
     <button type="submit" class="btn btn-default">送信</button>
   <% end %>
