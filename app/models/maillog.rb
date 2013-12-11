@@ -4,8 +4,6 @@ class Maillog
   field :time, :type => DateTime
   field :server_name
   field :daemon
-  field :proc_name
-  field :proc_no
 
   scope :date_filter, lambda {|date|
     date = (date)? Date.parse(date): Date.today 
