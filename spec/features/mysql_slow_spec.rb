@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe 'mysql_slow' do
   def format_log(log)
-    "#{log.server_name} #{log.time} #{log.user} #{log.host} #{log.host_ip} #{log.query_time} #{log.lock_time} #{log.rows_sent} #{log.rows_examined} #{log.sql}"
+    "#{log.server_name} #{log.time} #{log.user} #{log.host} #{log.host_ip} #{log.query_time} #{log.lock_time} #{log.rows_sent} #{log.rows_examined}"
   end
   subject { page }
 
@@ -30,7 +30,7 @@ describe 'mysql_slow' do
         logs.sort_by! {|log| log.lock_time }
         visit path
         logs.each_with_index do |log, i|
-          find("#mysql_slow_table > tbody > tr:nth-child(#{i+1})").should have_text(format_log(log))
+          find("#mysql_slow_table > tbody > tr:nth-child(#{2*i+1})").should have_text(format_log(log))
         end
       end
     end

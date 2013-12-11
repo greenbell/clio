@@ -25,8 +25,8 @@ describe 'top' do
         should_not have_css("tr:nth-child(6)")
       end
       within(:css, "#mysql_slow_table > tbody") do
-        should have_css("tr:nth-child(5)")
-        should_not have_css("tr:nth-child(6)")
+        should have_css("tr:nth-child(10)")
+        should_not have_css("tr:nth-child(11)")
       end
     end
   end
