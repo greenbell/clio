@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
   SyntaxHighlighter.defaults['gutter'] = false;
-  SyntaxHighlighter.all()
+  SyntaxHighlighter.all();
 });
