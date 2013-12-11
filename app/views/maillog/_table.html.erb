@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>server_name</th>
+      <th>daemon</th>
       <th>proc_name</th>
       <th>proc_no</th>
       <th><%= render "layouts/sortable_table_head", :form => "maillog_form", :item => "time" %></th>
@@ -11,6 +12,7 @@
     <%- @logs.each do |log| -%>
       <tr>
         <td><%= render "layouts/filterable_table_item", :form => "maillog_form", :item => "server_name", :value => log.server_name %></td>
+        <td><%= render "layouts/filterable_table_item", :form => "maillog_form", :item => "daemon", :value => log.daemon %></td>
         <td><%= render "layouts/filterable_table_item", :form => "maillog_form", :item => "proc_name", :value => log.proc_name %></td>
         <td><%= render "layouts/filterable_table_item", :form => "maillog_form", :item => "proc_no", :value => log.proc_no %></td>
         <td><%= log.time %></td>
