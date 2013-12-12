@@ -1,5 +1,5 @@
 <div>
-  <%= form_tag "rails_#{params[:app]}", :id => "rails_app_form", :class => "form", :role => "form", :method => "GET" do |f| %>
+  <%= form_tag "rails_production", :id => "rails_production_form", :class => "form", :role => "form", :method => "GET" do |f| %>
     <%= text_field_tag :date, params[:date] || Date.today.strftime("%Y/%m/%d"), :id => "date_picker" %>
     <script type="text/javascript">
       $(function () {
@@ -12,12 +12,13 @@
     <%= hidden_field_tag "sort", params[:sort] || "" %>
 
     <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
+    <%= hidden_field_tag "filter[app]", (params[:filter])? params[:filter][:app]: "" %>
     <%= hidden_field_tag "filter[level]", (params[:filter])? params[:filter][:level]: "" %>
     <button type="submit" class="btn btn-default">送信</button>
   <% end %>
   <% if params[:filter] %>
     <% params[:filter].each do |item, value| %>
-      <button type="button" class="btn btn-default" onclick="exec_filter('rails_app_form', '<%= item %>','')"><%= item %>: <%= value %> <span class="glyphicon glyphicon-remove"></span></button>
+      <button type="button" class="btn btn-default" onclick="exec_filter('rails_production_form', '<%= item %>','')"><%= item %>: <%= value %> <span class="glyphicon glyphicon-remove"></span></button>
     <% end %>
   <% end %>
 </div>

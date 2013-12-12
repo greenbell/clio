@@ -1,13 +1,11 @@
-class RailsApp
+class RailsProduction
   include Mongoid::Document
+  store_in :collection => "rails.production"
   field :time, :type => DateTime
   field :server_name
   field :level
+  field :app
   field :messages, :type => Array
-
-  def self.set_app(param)
-    RailsApp.store_in(:collection => "rails.#{param.gsub("_", ".")}")
-  end
 
   scope :date_filter, lambda {|date|
     date = (date)? Date.parse(date): Date.today 
