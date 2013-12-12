@@ -3,6 +3,7 @@ Clio::Application.routes.draw do
   resources :apache_access, :only => [:index]
   resources :mysql_slow, :only => [:index]
   resources :maillog, :only => [:index]
+  match 'rails_(:app)', :via => :get, :to => 'rails_app#index'
 
   # Example resource route with options:
   #   resources :products do
