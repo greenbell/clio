@@ -6,7 +6,6 @@ class RailsApp
   field :messages, :type => Array
 
   def self.set_app(param)
-    p "rails.#{param.gsub("_", ".")}"
     RailsApp.store_in(:collection => "rails.#{param.gsub("_", ".")}")
   end
 
