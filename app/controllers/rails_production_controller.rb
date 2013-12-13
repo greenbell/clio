@@ -2,7 +2,8 @@
 
 class RailsProductionController < ApplicationController
   def index
-    @logs = RailsProduction.date_filter(params[:date])
+    @logs = RailsProduction.set_session(params[:session])
+                           .date_filter(params[:date])
                            .value_filter(params[:filter])
                            .sort_chooser(params[:sort])
                            .page(params[:page])

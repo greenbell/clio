@@ -1,4 +1,4 @@
-<h1>apache.access</h1>
+<h1>apache.access<%= " - #{params[:session]}" if params[:session] %></h1>
 <%= render "form" %>
 <% if @logs %>
   <%= paginate @logs %>

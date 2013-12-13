@@ -12,6 +12,11 @@ class MysqlSlow
   field :rows_examined, :type => Integer
   field :sql
 
+  def self.set_session(param)
+    self.store_in :session => (param || "default")
+    self
+  end
+
   scope :date_filter, lambda {|date|
     date = (date)? Date.parse(date): Date.today 
     self.where(:time.gt => date, :time.lt => date + 1.day)

@@ -1,9 +1,6 @@
 Clio::Application.routes.draw do
   root :to => "top#index"
-  resources :apache_access, :only => [:index]
-  resources :mysql_slow, :only => [:index]
-  resources :maillog, :only => [:index]
-  resources :rails_production, :only => [:index]
+  match ':controller(/:session)', :action => :index, :via => :get
 
   # Example resource route with options:
   #   resources :products do

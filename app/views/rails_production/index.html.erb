@@ -1,4 +1,4 @@
-<h1>rails.production</h1>
+<h1>rails.production<%= " - #{params[:session]}" if params[:session] %></h1>
 <%= render "form" %>
 <% if @logs %>
   <%= paginate @logs %>

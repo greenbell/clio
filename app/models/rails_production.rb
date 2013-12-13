@@ -7,6 +7,11 @@ class RailsProduction
   field :app
   field :messages, :type => Array
 
+  def self.set_session(param)
+    self.store_in :session => (param || "default")
+    self
+  end
+
   scope :date_filter, lambda {|date|
     date = (date)? Date.parse(date): Date.today 
     self.where(:time.gt => date, :time.lt => date + 1.day)
