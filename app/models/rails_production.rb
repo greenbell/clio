@@ -17,6 +17,14 @@ class RailsProduction
     self.where(:time.gt => date, :time.lt => date + 1.day)
   }
 
+  scope :level_filter, lambda {|level|
+    if level.present?
+      self.where(:level => level)
+    else
+      nil 
+    end
+  }
+
   scope :value_filter, lambda {|params|
     if params
       params.delete_if {|key, value| value == ""}

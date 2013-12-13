@@ -14,7 +14,7 @@
         <td><%= render "layouts/filterable_table_item", :form => "rails_production_form", :item => "server_name", :value => log.server_name %></td>
         <td><%= render "layouts/filterable_table_item", :form => "rails_production_form", :item => "app", :value => log.app %></td>
         <td><%= log.time %></td>
-        <td><%= render "layouts/filterable_table_item", :form => "rails_production_form", :item => "level", :value => log.level %></td>
+        <td><%= log.level %></td>
         <td>
           <% log.messages.each_with_index do |message, i| %>
             <%= tag("br") unless i == 0 %>
