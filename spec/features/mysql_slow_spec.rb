@@ -96,7 +96,7 @@ describe 'mysql_slow' do
       end
     end
 
-    context "when specified today" do
+    context "when filtered by today" do
       let(:path) { log_path(:mysql_slow, :date => Date.today.strftime("%Y/%m/%d")) }
       it "shows only logs are created today" do
         today = create(:mysql_slow, :today)

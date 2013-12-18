@@ -23,8 +23,8 @@ describe 'apache_access' do
       all(".pagination").first.should have_text("« First ‹ Prev 1 2")
     end
     
-    context "when specified status code" do
-      shared_examples_for "specifying status code" do
+    context "when filtered by status code" do
+      shared_examples_for "filtered by status code" do
         it "shows only logs that fulfill" do
           visit path
           within(:css, "#apache_access_table > tbody") do
@@ -38,20 +38,20 @@ describe 'apache_access' do
         let(:path) { log_path(:apache_access, :code => "ok") }
         let!(:log) { create(:apache_access, :recent) }
         let!(:dummy) { create(:apache_access, :recent, :not_found) }
-        include_examples "specifying status code"
+        include_examples "filtered by status code"
       end
 
       context "without 200" do
         let(:path) { log_path(:apache_access, :code => "not_ok") }
         let!(:log) { create(:apache_access, :recent, :not_found) }
         let!(:dummy) { create(:apache_access, :recent) }
-        include_examples "specifying status code"
+        include_examples "filtered by status code"
       end
     end
 
-    context "when specified http method" do
+    context "when filtered by http method" do
       let!(:methods) { ["get", "post", "put", "delete", "options"] }
-      shared_examples_for "specifying http method" do
+      shared_examples_for "filtered by http method" do
         it "shows only logs that fulfill" do
           visit path
           within(:css, "#apache_access_table > tbody") do
@@ -64,40 +64,40 @@ describe 'apache_access' do
       context "GET" do
         let(:path) { log_path(:apache_access, :method => "get") }
         let!(:log) { create(:apache_access, :recent) }
-        let!(:dummy) { create(:apache_access, :recent, methods.reject{|v| v == nil}.sample.to_sym) }
-        include_examples "specifying http method"
+        let!(:dummy) { create(:apache_access, :recent, methods.reject{|v| v == "get"}.sample.to_sym) }
+        include_examples "filtered by http method"
       end
 
       context "POST" do
         let(:path) { log_path(:apache_access, :method => "post") }
         let!(:log) { create(:apache_access, :recent, :post) }
         let!(:dummy) { create(:apache_access, :recent, methods.reject{|v| v == "post"}.sample.to_sym) }
-        include_examples "specifying http method"
+        include_examples "filtered by http method"
       end
 
       context "PUT" do
         let(:path) { log_path(:apache_access, :method => "put") }
         let!(:log) { create(:apache_access, :recent, :put) }
         let!(:dummy) { create(:apache_access, :recent, methods.reject{|v| v == "put"}.sample.to_sym) }
-        include_examples "specifying http method"
+        include_examples "filtered by http method"
       end
 
       context "DELETE" do
         let(:path) { log_path(:apache_access, :method => "delete") }
         let!(:log) { create(:apache_access, :recent, :delete) }
         let!(:dummy) { create(:apache_access, :recent, methods.reject{|v| v == "delete"}.sample.to_sym) }
-        include_examples "specifying http method"
+        include_examples "filtered by http method"
       end
 
       context "OPTIONS" do
         let(:path) { log_path(:apache_access, :method => "options") }
         let!(:log) { create(:apache_access, :recent, :options) }
         let!(:dummy) { create(:apache_access, :recent, methods.reject{|v| v == "options"}.sample.to_sym) }
-        include_examples "specifying http method"
+        include_examples "filtered by http method"
       end
     end
 
-    context "when specified recent" do
+    context "when filtered by recent" do
       let(:path) { log_path(:apache_access, :date => 5.minute.ago.strftime("%Y/%m/%d")) }
       it "shows only logs are created recent" do
         recent = create(:apache_access, :recent)

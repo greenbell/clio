@@ -5,9 +5,9 @@ FactoryGirl.define do
     host_ip { Faker::Internet.ip_v4_address }
     host { Faker::Internet.domain_name }
     user { Faker::Internet.user_name }
-    query_time { Faker::Number.number(2) }
-    lock_time { Faker::Number.number(2) }
-    rows_sent { Faker::Number.number(2) }
+    query_time { Faker::Number.number(3) }
+    lock_time { Faker::Number.number(3) }
+    rows_sent { Faker::Number.number(3) }
     rows_examined { Faker::Number.number(3) }
     sql { Faker::Lorem.paragraph }
 

@@ -9,5 +9,21 @@ FactoryGirl.define do
     trait :today do
       time { rand(DateTime.now.to_f - Date.today.to_time.to_f).ago }
     end
+
+    trait :fatal do
+      level "FATAL"
+    end
+    trait :error do
+      level "ERROR"
+    end
+    trait :warn do
+      level "WARN"
+    end
+    trait :info do
+      level "info"
+    end
+    trait :debug do
+      level "DEBUG"
+    end
   end
 end
