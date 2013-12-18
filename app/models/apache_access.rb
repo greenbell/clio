@@ -14,6 +14,11 @@ class ApacheAccess
   field :forwarded
   field :server_name
 
+  def self.set_session(param)
+    self.store_in :session => (param || "default")
+    self
+  end
+
   scope :datetime_filter, lambda {|datetime|
     datetime = (datetime)? Time.parse(datetime): Time.now - 5.minute
     self.where(:time.gt => datetime, :time.lt => datetime + 5.minute)

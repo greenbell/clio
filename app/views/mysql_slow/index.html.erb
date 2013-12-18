@@ -1,4 +1,4 @@
-<h1>mysql.slow</h1>
+<h1>mysql.slow<%= " - #{params[:session]}" if params[:session] %></h1>
 <%= render "form" %>
 <% if @logs %>
   <%= paginate @logs %>

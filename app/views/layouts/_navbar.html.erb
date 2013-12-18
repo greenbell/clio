@@ -3,8 +3,36 @@
     <a class="navbar-brand" href="/">Clio</a>
   </div>
   <ul class="nav navbar-nav">
-    <li><a href="/apache_access">apache.access</a></li>
-    <li><a href="/mysql_slow">mysql.slow</a></li>
-    <li><a href="/maillog">maillog</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">apache.access<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="/apache_access">current</a></li>
+        <li><a href="/apache_access/staging">staging</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">mysql.slow<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="/mysql_slow">current</a></li>
+        <li><a href="/mysql_slow/staging">staging</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">rails.production<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="/rails_production">current</a></li>
+        <li><a href="/rails_production/staging">staging</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">maillog<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="/maillog">current</a></li>
+        <li><a href="/maillog/staging">staging</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>

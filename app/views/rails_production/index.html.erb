@@ -1,4 +1,4 @@
-<h1>maillog<%= " - #{params[:session]}" if params[:session] %></h1>
+<h1>rails.production<%= " - #{params[:session]}" if params[:session] %></h1>
 <%= render "form" %>
 <% if @logs %>
   <%= paginate @logs %>
@@ -7,4 +7,4 @@
 <% else %>
   該当するログがありませんでした
 <% end %>
-<%= javascript_include_tag :maillog %>
+<%= javascript_include_tag :rails_production %>

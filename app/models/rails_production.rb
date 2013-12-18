@@ -1,9 +1,11 @@
-class Maillog
+class RailsProduction
   include Mongoid::Document
-  store_in collection: "maillog"
+  store_in :collection => "rails.production"
   field :time, :type => DateTime
   field :server_name
-  field :daemon
+  field :level
+  field :app
+  field :messages, :type => Array
 
   def self.set_session(param)
     self.store_in :session => (param || "default")
@@ -13,6 +15,14 @@ class Maillog
   scope :date_filter, lambda {|date|
     date = (date)? Date.parse(date): Date.today 
     self.where(:time.gt => date, :time.lt => date + 1.day)
+  }
+
+  scope :level_filter, lambda {|level|
+    if level.present?
+      self.where(:level => level)
+    else
+      nil 
+    end
   }
 
   scope :value_filter, lambda {|params|
