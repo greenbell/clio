@@ -3,11 +3,11 @@
 class ApacheAccessController < ApplicationController
   def index
     @logs = ApacheAccess.set_session(params[:session])
-                        .datetime_filter(params[:datetime])
-                        .value_filter(params[:filter])
-                        .code_filter(params[:code])
-                        .method_filter(params[:method])
-                        .sort_chooser(params[:sort])
+                        .filter_by_datetime(params[:datetime])
+                        .filter_by_value(params[:filter])
+                        .filter_by_code(params[:code])
+                        .filter_by_method(params[:method])
+                        .choose_order(params[:sort])
                         .page(params[:page])
                         .per(30)
   end

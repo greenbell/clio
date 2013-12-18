@@ -15,16 +15,16 @@ class ApacheAccess
   field :server_name
 
   def self.set_session(param)
-    self.store_in :session => (param || "default")
+    store_in :session => (param || "default")
     self
   end
 
-  scope :datetime_filter, lambda {|datetime|
+  scope :filter_by_datetime, lambda {|datetime|
     datetime = (datetime)? Time.parse(datetime): Time.now - 5.minute
     self.where(:time.gt => datetime, :time.lt => datetime + 5.minute)
   }
 
-  scope :value_filter, lambda {|params|
+  scope :filter_by_value, lambda {|params|
     if params
       params.delete_if {|key, value| value == ""}
       self.where(params)
@@ -35,7 +35,7 @@ class ApacheAccess
 
   scope :ok, -> { where(:code => "200") }
   scope :not_ok, -> { where(:code.ne => "200") }
-  scope :code_filter, lambda {|param|
+  scope :filter_by_code, lambda {|param|
     case param
     when "ok"
       self.ok
@@ -51,7 +51,7 @@ class ApacheAccess
   scope :put, -> { where(:method => "PUT") }
   scope :delete, -> { where(:method => "DELETE") }
   scope :options, -> { where(:method => "OPTIONS") }
-  scope :method_filter, lambda {|param|
+  scope :filter_by_method, lambda {|param|
     case param
     when "get"
       self.get
@@ -68,7 +68,7 @@ class ApacheAccess
     end
   }
 
-  scope :sort_chooser, lambda {|param|
+  scope :choose_order, lambda {|param|
     case param
     when "a-time"
       self.asc(:time)

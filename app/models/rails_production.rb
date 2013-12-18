@@ -8,16 +8,16 @@ class RailsProduction
   field :messages, :type => Array
 
   def self.set_session(param)
-    self.store_in :session => (param || "default")
+    store_in :session => (param || "default")
     self
   end
 
-  scope :date_filter, lambda {|date|
+  scope :filter_by_date, lambda {|date|
     date = (date)? Date.parse(date): Date.today 
     self.where(:time.gt => date, :time.lt => date + 1.day)
   }
 
-  scope :level_filter, lambda {|level|
+  scope :filter_by_level, lambda {|level|
     if level.present?
       self.where(:level => level)
     else
@@ -25,7 +25,7 @@ class RailsProduction
     end
   }
 
-  scope :value_filter, lambda {|params|
+  scope :filter_by_value, lambda {|params|
     if params
       params.delete_if {|key, value| value == ""}
       self.where(params)
@@ -34,7 +34,7 @@ class RailsProduction
     end
   }
 
-  scope :sort_chooser, lambda {|param|
+  scope :choose_order, lambda {|param|
     case param
     when "a-time"
       self.asc(:time)
