@@ -24,7 +24,7 @@ describe 'rails_production' do
     end
 
     context "when sorted by" do
-      let(:logs) { 5.times.map { create(:rails_production, :today) }}
+      let!(:logs) { 5.times.map { create(:rails_production, :today) }}
       shared_examples_for "sorting" do
         it "shows sorted logs" do
           logs.sort_by! &order
@@ -54,7 +54,7 @@ describe 'rails_production' do
         today = create(:rails_production, :today)
         dummy = create(:rails_production, :time => rand(DateTime.now.to_f - Date.today.to_time.to_f).ago - 1.day)
         visit path
-        within(:css, "#rails_production_table") do
+        within(:css, "#rails_production_table > tbody") do
           should have_text(format_log(today))
           should_not have_text(format_log(dummy))
         end
@@ -62,12 +62,12 @@ describe 'rails_production' do
     end
 
     context "when filtered by value of" do
-      let(:log) { create(:rails_production, :today) }
-      let(:dummy) { create(:rails_production, :today) }
+      let!(:log) { create(:rails_production, :today) }
+      let!(:dummy) { create(:rails_production, :today) }
       shared_examples_for "filtering" do
         it "shows only logs that fulfill" do
           visit path
-          within(:css, "#rails_production_table") do
+          within(:css, "#rails_production_table > tbody") do
             should have_text(format_log(log))
             should_not have_text(format_log(dummy))
           end
@@ -86,12 +86,12 @@ describe 'rails_production' do
     end
 
     context "when filtered by level" do
-      let(:log) { create(:rails_production, :today) }
+      let!(:log) { create(:rails_production, :today) }
       let(:path) { log_path(:rails_production, :level => log.level) }
       it "shows only logs whose level is specified" do
         dummy = create(:rails_production, :today)
         visit path
-        within(:css, "#rails_production_table") do
+        within(:css, "#rails_production_table > tbody") do
           should have_text(format_log(log))
           should_not have_text(format_log(dummy))
         end
