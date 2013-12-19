@@ -17,9 +17,11 @@ class MysqlSlow
     self
   end
 
-  scope :filter_by_date, lambda {|date|
+  scope :filter_by_datetime, lambda {|date, time|
     date = (date)? Date.parse(date): Date.today 
-    self.where(:time.gt => date, :time.lt => date + 1.day)
+    time = (time)? time.to_i: DateTime.now.hour
+    datetime = date + time.hour
+    self.where(:time.gt => datetime, :time.lt => datetime + 1.hour)
   }
 
   scope :filter_by_value, lambda {|params|

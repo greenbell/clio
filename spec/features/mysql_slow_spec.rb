@@ -10,13 +10,13 @@ describe 'mysql_slow' do
   describe '#index' do
     let(:path) { log_path(:mysql_slow) }
     it "shows log exactly" do
-      log = create(:mysql_slow, :today)
+      log = create(:mysql_slow, :recent)
       visit path
       find("#mysql_slow_table > tbody").should have_text(format_log(log))
     end
 
     it "paginates exactly" do
-      logs = 31.times.map { create(:mysql_slow, :today) }
+      logs = 31.times.map { create(:mysql_slow, :recent) }
       logs.sort_by! {|log| DateTime.now - log.time}
       visit log_path(:mysql_slow, :page => 2)
       find("#mysql_slow_table > tbody").should have_text(format_log(logs[-1]))
@@ -24,7 +24,7 @@ describe 'mysql_slow' do
     end
 
     context "when sorted by" do
-      let!(:logs) { 5.times.map { create(:mysql_slow, :today) }}
+      let!(:logs) { 5.times.map { create(:mysql_slow, :recent) }}
       shared_examples_for "sorting" do
         it "shows sorted logs" do
           logs.sort_by! &order
@@ -96,22 +96,22 @@ describe 'mysql_slow' do
       end
     end
 
-    context "when filtered by today" do
-      let(:path) { log_path(:mysql_slow, :date => Date.today.strftime("%Y/%m/%d")) }
-      it "shows only logs are created today" do
-        today = create(:mysql_slow, :today)
-        dummy = create(:mysql_slow, :time => rand(DateTime.now.to_f - Date.today.to_time.to_f).ago - 1.day)
+    context "when filtered by recent" do
+      let(:path) { log_path(:mysql_slow) }
+      it "shows only logs are created recent" do
+        recent = create(:mysql_slow, :recent)
+        dummy = create(:mysql_slow, :time => rand(DateTime.now.minute.minute).ago - 1.hour)
         visit path
         within(:css, "#mysql_slow_table > tbody") do
-          should have_text(format_log(today))
+          should have_text(format_log(recent))
           should_not have_text(format_log(dummy))
         end
       end
     end
 
     context "when filtered by value of" do
-      let!(:log) { create(:mysql_slow, :today) }
-      let!(:dummy) { create(:mysql_slow, :today) }
+      let!(:log) { create(:mysql_slow, :recent) }
+      let!(:dummy) { create(:mysql_slow, :recent) }
       shared_examples_for "filtering" do
         it "shows only logs that fulfill" do
           visit path

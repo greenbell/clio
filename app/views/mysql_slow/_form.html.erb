@@ -1,14 +1,7 @@
 <div>
-  <%= form_tag request.path_info, :id => "mysql_slow_form", :class => "form", :role => "form", :method => "GET" do |f| %>
-    <%= text_field_tag :date, params[:date] || Date.today.strftime("%Y/%m/%d"), :id => "date_picker" %>
-    <script type="text/javascript">
-      $(function () {
-        $('#date_picker').datetimepicker({
-          language: "ja",
-          pickTime: false
-        });
-      });
-    </script>
+  <%= form_tag request.path_info, :id => "mysql_slow_form", :class => "form-inline", :role => "form", :method => "GET" do |f| %>
+    <%= render "layouts/date_picker" %>
+    <%= render "layouts/time_picker" %>
     <%= hidden_field_tag "sort", params[:sort] || "" %>
 
     <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
