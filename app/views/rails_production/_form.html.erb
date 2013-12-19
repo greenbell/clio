@@ -1,14 +1,7 @@
 <div>
-  <%= form_tag request.path_info, :id => "rails_production_form", :class => "form", :role => "form", :method => "GET" do |f| %>
-    <%= text_field_tag :date, params[:date] || Date.today.strftime("%Y/%m/%d"), :id => "date_picker" %>
-    <script type="text/javascript">
-      $(function () {
-        $('#date_picker').datetimepicker({
-          language: "ja",
-          pickTime: false
-        });
-      });
-    </script>
+  <%= form_tag request.path_info, :id => "rails_production_form", :class => "form-inline", :role => "form", :method => "GET" do |f| %>
+    <%= render "layouts/date_picker" %>
+    <%= render "layouts/time_picker" %>
     <label>
       ログレベル:
       <%= select_tag :level, options_for_select([["全て", ""], "FATAL", "ERROR", "WARN", "INFO", "DEBUG"], params[:level] || ""), :class => "form-control" %>

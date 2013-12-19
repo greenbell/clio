@@ -10,13 +10,13 @@ describe 'rails_production' do
   describe '#index' do
     let(:path) { log_path(:rails_production) }
     it "shows log exactly" do
-      log = create(:rails_production, :today)
+      log = create(:rails_production, :recent)
       visit path
       find("#rails_production_table > tbody").should have_text(format_log(log))
     end
 
     it "paginates exactly" do
-      logs = 31.times.map { create(:rails_production, :today) }
+      logs = 31.times.map { create(:rails_production, :recent) }
       logs.sort_by! {|log| DateTime.now - log.time}
       visit log_path(:rails_production, :page => 2)
       find("#rails_production_table > tbody").should have_text(format_log(logs[-1]))
@@ -24,7 +24,7 @@ describe 'rails_production' do
     end
 
     context "when sorted by" do
-      let!(:logs) { 5.times.map { create(:rails_production, :today) }}
+      let!(:logs) { 5.times.map { create(:rails_production, :recent) }}
       shared_examples_for "sorting" do
         it "shows sorted logs" do
           logs.sort_by! &order
@@ -48,22 +48,21 @@ describe 'rails_production' do
       end
     end
 
-    context "when filtered by today" do
-      let(:path) { log_path(:rails_production ,:date => Date.today.strftime("%Y/%m/%d")) }
-      it "shows only logs are created today" do
-        today = create(:rails_production, :today)
-        dummy = create(:rails_production, :time => rand(DateTime.now.to_f - Date.today.to_time.to_f).ago - 1.day)
+    context "when filtered by recent" do
+      it "shows only logs are created recent" do
+        log = create(:rails_production, :recent)
+        dummy = create(:rails_production, :time => rand(DateTime.now.hour.hour).ago - 1.hour)
         visit path
         within(:css, "#rails_production_table > tbody") do
-          should have_text(format_log(today))
+          should have_text(format_log(log))
           should_not have_text(format_log(dummy))
         end
       end
     end
 
     context "when filtered by value of" do
-      let!(:log) { create(:rails_production, :today) }
-      let!(:dummy) { create(:rails_production, :today) }
+      let!(:log) { create(:rails_production, :recent) }
+      let!(:dummy) { create(:rails_production, :recent) }
       shared_examples_for "filtering" do
         it "shows only logs that fulfill" do
           visit path
@@ -87,7 +86,7 @@ describe 'rails_production' do
 
     context "when filtered by level" do
       let!(:levels) { ["fatal", "error", "warn", "info", "debug"] }
-      let!(:log) { create(:rails_production, :today) }
+      let!(:log) { create(:rails_production, :recent) }
       let(:path) { log_path(:rails_production, :level => log.level) }
       
       shared_examples_for "filtered by level" do
@@ -101,32 +100,32 @@ describe 'rails_production' do
       end
 
       context "FATAL" do
-        let(:log) { create(:rails_production, :today, :fatal) }
-        let!(:dummy) { create(:rails_production, :today, levels.reject{|v| v == "fatal"}.sample.to_sym) }
+        let(:log) { create(:rails_production, :recent, :fatal) }
+        let!(:dummy) { create(:rails_production, :recent, levels.reject{|v| v == "fatal"}.sample.to_sym) }
         include_examples "filtered by level"
       end
 
       context "ERROR" do
-        let(:log) { create(:rails_production, :today, :error) }
-        let!(:dummy) { create(:rails_production, :today, levels.reject{|v| v == "error"}.sample.to_sym) }
+        let(:log) { create(:rails_production, :recent, :error) }
+        let!(:dummy) { create(:rails_production, :recent, levels.reject{|v| v == "error"}.sample.to_sym) }
         include_examples "filtered by level"
       end
 
       context "WARN" do
-        let(:log) { create(:rails_production, :today, :warn) }
-        let!(:dummy) { create(:rails_production, :today, levels.reject{|v| v == "warn"}.sample.to_sym) }
+        let(:log) { create(:rails_production, :recent, :warn) }
+        let!(:dummy) { create(:rails_production, :recent, levels.reject{|v| v == "warn"}.sample.to_sym) }
         include_examples "filtered by level"
       end
 
       context "INFO" do
-        let(:log) { create(:rails_production, :today, :info) }
-        let!(:dummy) { create(:rails_production, :today, levels.reject{|v| v == "info"}.sample.to_sym) }
+        let(:log) { create(:rails_production, :recent, :info) }
+        let!(:dummy) { create(:rails_production, :recent, levels.reject{|v| v == "info"}.sample.to_sym) }
         include_examples "filtered by level"
       end
 
       context "DEBUG" do
-        let(:log) { create(:rails_production, :today, :debug) }
-        let!(:dummy) { create(:rails_production, :today, levels.reject{|v| v == "debug"}.sample.to_sym) }
+        let(:log) { create(:rails_production, :recent, :debug) }
+        let!(:dummy) { create(:rails_production, :recent, levels.reject{|v| v == "debug"}.sample.to_sym) }
         include_examples "filtered by level"
       end
     end
