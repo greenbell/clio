@@ -10,13 +10,13 @@ describe 'maillog' do
   describe '#index' do
     let(:path) { log_path(:maillog) }
     it "shows log exactly" do
-      log = create(:maillog, :today)
+      log = create(:maillog, :recent)
       visit path
       find("#maillog_table > tbody").should have_text(format_log(log))
     end
 
     it "paginates exactly" do
-      logs = 31.times.map { create(:maillog, :today) }
+      logs = 31.times.map { create(:maillog, :recent) }
       logs.sort_by! {|log| DateTime.now - log.time}
       visit log_path(:maillog, :page => 2)
       find("#maillog_table > tbody").should have_text(format_log(logs[-1]))
@@ -24,7 +24,7 @@ describe 'maillog' do
     end
 
     context "when sorted by" do
-      let!(:logs) { 5.times.map { create(:maillog, :today) }}
+      let!(:logs) { 5.times.map { create(:maillog, :recent) }}
       shared_examples_for "sorting" do
         it "shows sorted logs" do
           logs.sort_by! &order
@@ -48,22 +48,22 @@ describe 'maillog' do
       end
     end
 
-    context "when filtered by today" do
-      let(:path) { log_path(:maillog, :date => Date.today.strftime("%Y/%m/%d")) }
-      it "shows only logs are created today" do
-        today = create(:maillog, :today)
-        dummy = create(:maillog, :time => rand(DateTime.now.to_f - Date.today.to_time.to_f).ago - 1.day)
+    context "when filtered by recent" do
+      let(:path) { log_path(:maillog) }
+      it "shows only logs are created recent" do
+        recent = create(:maillog, :recent)
+        dummy = create(:maillog, :time => rand(DateTime.now.minute.minute).ago - 1.hour)
         visit path
         within(:css, "#maillog_table > tbody") do
-          should have_text(format_log(today))
+          should have_text(format_log(recent))
           should_not have_text(format_log(dummy))
         end
       end
     end
 
     context "when filtered by value of" do
-      let!(:log) { create(:maillog, :today) }
-      let!(:dummy) { create(:maillog, :today) }
+      let!(:log) { create(:maillog, :recent) }
+      let!(:dummy) { create(:maillog, :recent) }
       shared_examples_for "filtering" do
         it "shows only logs that fulfill" do
           visit path
