@@ -12,11 +12,9 @@ class RailsProduction
     self
   end
 
-  scope :filter_by_datetime, lambda {|date, time|
-    date = (date)? Date.parse(date): Date.today 
-    time = (time)? time.to_i: DateTime.now.hour
-    datetime = date + time.hour
-    self.where(:time.gt => datetime, :time.lt => datetime + 1.hour)
+  scope :filter_by_datetime, lambda {|datetime|
+    datetime = (datetime)? DateTime.parse(datetime): DateTime.now - 15.minute
+    self.where(:time.gt => datetime, :time.lt => datetime + 15.minute)
   }
 
   scope :filter_by_level, lambda {|level|
