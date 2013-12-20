@@ -18,7 +18,7 @@ class MysqlSlow
   end
 
   scope :filter_by_datetime, lambda {|datetime|
-    datetime = (datetime)? DateTime.parse(datetime): DateTime.now - 1.hour
+    datetime = (datetime)? Time.parse(datetime): Time.now - 1.hour 
     self.where(:time.gt => datetime, :time.lt => datetime + 1.hour)
   }
 
