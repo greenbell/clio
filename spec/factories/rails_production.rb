@@ -11,7 +11,7 @@ FactoryGirl.define do
     end
 
     trait :recent do
-      time { rand(DateTime.now.minute.minute).ago }
+      time { rand(15.minute).ago }
     end
 
     trait :fatal do
