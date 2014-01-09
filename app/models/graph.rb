@@ -29,11 +29,11 @@ class Graph < ActiveResource::Base
   end
 
   def self.select_service(service_name)
-    self.prefix = service_name || "log"
+    self.prefix = "graph/#{service_name || "log"}"
     self
   end
 
-  self.site = "http://0.0.0.0:5125/graph/"
+  self.site = "http://0.0.0.0:5125/"
   self.format = Format.new
   self.logger = Logger.new($stderr)
 end
