@@ -22,7 +22,7 @@ class Graph < ActiveResource::Base
 
   def self.find(arg)
     begin
-      super.find(arg)
+      super(arg)
     rescue ActiveResource::ResourceNotFound
       nil
     end
