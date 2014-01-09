@@ -2,9 +2,12 @@
 
 class RailsProductionController < ApplicationController
   def index
-    begin
-      @graph = Graph.select_collection("rails.production").find(params[:filter][:app]) if params[:filter][:app].present? if params[:filter]
-    rescue ActiveResource::ResourceNotFound
+    if params[:filter]
+      if params[:filter][:app].present?
+        @graph = Graph.select_service(params[:session])
+                      .select_collection("rails.production")
+                      .find(params[:filter][:app])
+      end
     end
     @logs = RailsProduction.set_session(params[:session])
                            .filter_by_datetime(params[:datetime])
