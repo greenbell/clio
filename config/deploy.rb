@@ -13,6 +13,10 @@ set :ssh_options, {
   :auth_methods => %w(publickey)
 }
 
+set :default_environment, {
+  'PATH' => "/opt/ruby-2.0.0-p247/bin:$PATH"
+}
+
 set :deploy_to, "/var/www/clio/clio/"
 namespace :deploy do
   task :start do
