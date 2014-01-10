@@ -3,7 +3,7 @@
 class ApacheAccessController < ApplicationController
   def index
     @graph = Graph.select_service(params[:session])
-                  .select_collection("apache")
+                  .select_section("apache")
                   .find("access")
     @logs = ApacheAccess.set_session(params[:session])
                         .filter_by_datetime(params[:datetime])

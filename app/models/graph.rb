@@ -12,12 +12,7 @@ class Graph < ActiveResource::Base
 
   def self.element_path(id, prefix_options = {}, query_options = nil)
     prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-    "/#{prefix(prefix_options)}/#{collection_name}/#{URI.escape id.to_s}#{query_string(query_options)}"
-  end
-
-  def self.select_collection(collection_name)
-    self.collection_name = collection_name
-    self
+    "/#{@@api}/#{@@service}/#{@@section}/#{URI.escape id.to_s}#{query_string(query_options)}"
   end
 
   def self.find(arg)
@@ -28,14 +23,24 @@ class Graph < ActiveResource::Base
     end
   end
 
-  def self.select_service(service_name)
-    self.prefix = "graph/#{service_name || "log"}"
+  def self.change_api(api)
+    @@api = api
     self
   end
 
+  def self.select_service(service_name)
+    @@service = service_name
+    self
+  end
+
+  def self.select_section(section_name)
+    @@section = section_name
+    self
+  end
+
+  @@api = "graph"
   self.site = "http://0.0.0.0:5125/"
+
   self.format = Format.new
   self.logger = Logger.new($stderr)
 end
-
-    
