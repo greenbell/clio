@@ -1,46 +1,37 @@
-require 'active_resource'
 require 'base64'
+require 'open-uri'
 
-class Graph < ActiveResource::Base
-  class Format
-    def extension() "" end
-    def mime_type() "image/png" end
-    def decode(image)
-      {:dataurl => "data:image/png;base64,#{Base64.encode64(image).gsub("\n", "")}"}
-    end
+class Graph
+  def initialize
+    @site = "http://0.0.0.0:5125/"
+    @api = "graph"
+    @service = ""
+    @section = ""
   end
 
-  def self.element_path(id, prefix_options = {}, query_options = nil)
-    prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-    "/#{@@api}/#{@@service}/#{@@section}/#{URI.escape id.to_s}#{query_string(query_options)}"
+  def change_api(api)
+    @api = api
+    self
   end
 
-  def self.find(arg)
+  def select_service(service_name)
+    @service = service_name
+    self
+  end
+
+  def select_section(section_name)
+    @section = section_name
+    self
+  end
+
+  def get_graph(graph_name)
+    uri = "#{@site}#{@api}/#{@service}/#{@section}/#{graph_name}"
     begin
-      super(arg)
-    rescue ActiveResource::ResourceNotFound
-      nil
+      open(uri) {|f|
+        @dataurl = "data:image/png;base64,#{Base64.encode64(f.read).gsub("\n", "")}"
+      }
+    rescue OpenURI::HTTPError
     end
+    nil
   end
-
-  def self.change_api(api)
-    @@api = api
-    self
-  end
-
-  def self.select_service(service_name)
-    @@service = service_name
-    self
-  end
-
-  def self.select_section(section_name)
-    @@section = section_name
-    self
-  end
-
-  @@api = "graph"
-  self.site = "http://0.0.0.0:5125/"
-
-  self.format = Format.new
-  self.logger = Logger.new($stderr)
 end
