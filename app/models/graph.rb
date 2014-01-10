@@ -30,8 +30,13 @@ class Graph
       open(uri) {|f|
         @dataurl = "data:image/png;base64,#{Base64.encode64(f.read).gsub("\n", "")}"
       }
+      self
     rescue OpenURI::HTTPError
+      nil
     end
-    nil
+  end
+
+  def dataurl
+    @dataurl
   end
 end

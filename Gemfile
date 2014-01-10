@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.1'
-gem 'activeresource', require: 'active_resource'
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 gem 'moped', git: 'https://github.com/mongoid/moped.git'
 gem 'kaminari'
