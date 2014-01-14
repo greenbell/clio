@@ -5,6 +5,12 @@ class Maillog
   field :server_name
   field :daemon
 
+  def self.get_graph(params)
+    @graph = Graph.new.select_service(params[:session])
+                      .select_section("maillog")
+                      .get_graph("count")
+  end
+
   def self.set_session(param)
     store_in :session => (param || "default")
     self

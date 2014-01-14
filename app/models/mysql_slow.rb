@@ -12,6 +12,12 @@ class MysqlSlow
   field :rows_examined, :type => Integer
   field :sql
 
+  def self.get_graph(params)
+    @graph = Graph.new.select_service(params[:session])
+                      .select_section("mysql")
+                      .get_graph("slow")
+  end
+
   def self.set_session(param)
     store_in :session => (param || "default")
     self

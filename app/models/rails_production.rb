@@ -7,6 +7,22 @@ class RailsProduction
   field :app
   field :messages, :type => Array
 
+  def self.get_graph(params)
+    if params[:filter]
+      if params[:filter][:app].present?
+        Graph.new.select_service(params[:session])
+             .select_section("rails.production")
+             .get_graph(params[:filter][:app])
+      elsif params[:filter][:server_name].present?
+        Graph.new.change_api("complex/graph")
+             .select_service(params[:session])
+             .select_section("rails.production")
+             .get_graph(params[:filter][:server_name])
+      end
+    end
+  end
+
+
   def self.set_session(param)
     store_in :session => (param || "default")
     self

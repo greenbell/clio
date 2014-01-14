@@ -14,6 +14,12 @@ class ApacheAccess
   field :forwarded
   field :server_name
 
+  def self.get_graph(params)
+    @graph = Graph.new.select_service(params[:session])
+                      .select_section("apache")
+                      .get_graph("access")
+  end
+
   def self.set_session(param)
     store_in :session => (param || "default")
     self
