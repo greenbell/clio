@@ -7,19 +7,33 @@ class RailsProduction
   field :app
   field :messages, :type => Array
 
-  def self.get_graph(params)
+  def self.get_graphs(params)
+    graphs = []
     if params[:filter]
       if params[:filter][:app].present?
-        Graph.new.select_service(params[:session])
-             .select_section("rails.production")
-             .get_graph(params[:filter][:app])
-      elsif params[:filter][:server_name].present?
-        Graph.new.change_api("complex/graph")
-             .select_service(params[:session])
-             .select_section("rails.production")
-             .get_graph(params[:filter][:server_name])
+        graphs.push Graph.new.set_name(params[:filter][:app])
+                             .set_id("app")
+                             .select_service(params[:session])
+                             .select_section("rails.production")
+                             .get_graph(params[:filter][:app])
+      end
+      if params[:filter][:server_name].present?
+        graphs.push Graph.new.set_name(params[:filter][:server_name])
+                             .set_id("server")
+                             .change_api("complex/graph")
+                             .select_service(params[:session])
+                             .select_section("rails.production")
+                             .get_graph(params[:filter][:server_name])
       end
     end
+    graphs.push Graph.new.set_name("全サーバー")
+                         .set_id("all")
+                         .change_api("complex/graph")
+                         .select_service(params[:session])
+                         .select_section("rails.production")
+                         .get_graph("all")
+    graphs.delete(nil)
+    graphs
   end
 
 

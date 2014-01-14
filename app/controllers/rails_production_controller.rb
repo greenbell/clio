@@ -2,7 +2,7 @@
 
 class RailsProductionController < ApplicationController
   def index
-    @graph = RailsProduction.get_graph(params)
+    @graphs = RailsProduction.get_graphs(params)
     @logs = RailsProduction.set_session(params[:session])
                            .filter_by_datetime(params[:datetime])
                            .filter_by_level(params[:level])
