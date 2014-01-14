@@ -14,10 +14,15 @@ class ApacheAccess
   field :forwarded
   field :server_name
 
-  def self.get_graph(params)
-    @graph = Graph.new.select_service(params[:session])
-                      .select_section("apache")
-                      .get_graph("access")
+  def self.get_graphs(params)
+    graphs = []
+    graphs.push Graph.new.set_name("全サーバー")
+                         .set_id("all")
+                         .select_service(params[:session])
+                         .select_section("apache")
+                         .get_graph("access")
+    graphs.delete(nil)
+    graphs
   end
 
   def self.set_session(param)

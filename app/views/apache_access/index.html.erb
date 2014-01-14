@@ -1,5 +1,5 @@
 <h1>apache.access<%= " - #{params[:session]}" if params[:session] %></h1>
-<%= image_tag @graph.dataurl if @graph %>
+<%= render "layouts/graphs", :graphs => @graphs %>
 <%= render "form" %>
 <% if @logs %>
   <%= paginate @logs %>

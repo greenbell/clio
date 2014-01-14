@@ -23,6 +23,16 @@ class Graph
     @section = section_name
     self
   end
+  
+  def set_name(name)
+    @name = name
+    self
+  end
+
+  def set_id(id)
+    @id = id
+    self
+  end
 
   def get_graph(graph_name)
     uri = "#{@site}#{@api}/#{@service}/#{@section}/#{graph_name}"
@@ -38,5 +48,13 @@ class Graph
 
   def dataurl
     @dataurl
+  end
+
+  def name
+    @name
+  end
+
+  def id
+    @id
   end
 end
