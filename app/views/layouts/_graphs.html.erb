@@ -1,4 +1,5 @@
 <% if graphs %>
+  サーバー名やアプリ名クリックでグラフが追加されます
   <ul class="nav nav-tabs">
   <% graphs.each_with_index do |graph, i| %>
     <li<%= raw ' class="active"' if i == 0 %>><a href="#<%= graph.id %>" data-toggle="tab"><%= graph.name %></a></li>

@@ -16,16 +16,27 @@ class ApacheAccess
 
   def self.get_graphs(params)
     graphs = []
+    if params[:filter]
+      if params[:filter][:server_name].present?
+        graphs.push Graph.new.set_name("#{params[:filter][:server_name]} - デイリー")
+                             .set_id("server_daily")
+                             .select_service(params[:session])
+                             .select_section("apache.access")
+                             .get_graph(params[:filter][:server_name])
+      end
+    end
     graphs.push Graph.new.set_name("全サーバー - デイリー")
                          .set_id("all_daily")
+                         .change_api("complex/graph")
                          .select_service(params[:session])
-                         .select_section("apache")
-                         .get_graph("access")
+                         .select_section("apache.access")
+                         .get_graph("all")
     graphs.push Graph.new.set_name("全サーバー - 毎時")
                          .set_id("all_hourly")
+                         .change_api("complex/graph")
                          .select_service(params[:session])
-                         .select_section("apache")
-                         .get_graph("access", :t => "sh")
+                         .select_section("apache.access")
+                         .get_graph("all", :t => "sh")
     graphs.delete(nil)
     graphs
   end
