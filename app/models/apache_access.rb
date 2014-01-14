@@ -16,11 +16,16 @@ class ApacheAccess
 
   def self.get_graphs(params)
     graphs = []
-    graphs.push Graph.new.set_name("全サーバー")
-                         .set_id("all")
+    graphs.push Graph.new.set_name("全サーバー - デイリー")
+                         .set_id("all_daily")
                          .select_service(params[:session])
                          .select_section("apache")
                          .get_graph("access")
+    graphs.push Graph.new.set_name("全サーバー - 毎時")
+                         .set_id("all_hourly")
+                         .select_service(params[:session])
+                         .select_section("apache")
+                         .get_graph("access", :t => "sh")
     graphs.delete(nil)
     graphs
   end

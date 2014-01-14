@@ -1,7 +1,7 @@
 <% if graphs %>
   <ul class="nav nav-tabs">
-  <% graphs.each do |graph| %>
-    <li><%= link_to graph.name, "#{graph.id}", :"data-toggle" => "tab" %></li>
+  <% graphs.each_with_index do |graph, i| %>
+    <li<%= raw ' class="active"' if i == 0 %>><a href="#<%= graph.id %>" data-toggle="tab"><%= graph.name %></a></li>
   <% end %>
   </ul>
   <div class="tab-content">

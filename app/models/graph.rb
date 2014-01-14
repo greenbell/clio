@@ -34,8 +34,9 @@ class Graph
     self
   end
 
-  def get_graph(graph_name)
+  def get_graph(graph_name, params={})
     uri = "#{@site}#{@api}/#{@service}/#{@section}/#{graph_name}"
+    uri += "?#{params.map{|k,v| "#{k}=#{v}"}.join('&')}" unless params.empty?
     begin
       open(uri) {|f|
         @dataurl = "data:image/png;base64,#{Base64.encode64(f.read).gsub("\n", "")}"
