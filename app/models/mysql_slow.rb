@@ -12,10 +12,31 @@ class MysqlSlow
   field :rows_examined, :type => Integer
   field :sql
 
-  def self.get_graph(params)
-    @graph = Graph.new.select_service(params[:session])
-                      .select_section("mysql")
-                      .get_graph("slow")
+  def self.get_graphs(params)
+    graphs = []
+    if params[:filter]
+      if params[:filter][:server_name].present?
+        graphs.push Graph.new.set_name("#{params[:filter][:server_name]} - デイリー")
+                             .set_id("server_daily")
+                             .select_service(params[:session])
+                             .select_section("mysql.slow")
+                             .get_graph(params[:filter][:server_name])
+      end
+    end
+    graphs.push Graph.new.set_name("全サーバー - デイリー")
+                         .set_id("all_daily")
+                         .change_api("complex/graph")
+                         .select_service(params[:session])
+                         .select_section("mysql.slow")
+                         .get_graph("all")
+    graphs.push Graph.new.set_name("全サーバー - 毎時")
+                         .set_id("all_hourly")
+                         .change_api("complex/graph")
+                         .select_service(params[:session])
+                         .select_section("mysql.slow")
+                         .get_graph("all", :t => "sh")
+    graphs.delete(nil)
+    graphs
   end
 
   def self.set_session(param)
