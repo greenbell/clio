@@ -1,5 +1,8 @@
 @import "bootstrap";
 @import "bootstrap/theme";
+@import "bootstrap-datetimepicker.min";
+@import "shCore";
+@import "shThemeDefault";
 
 body .syntaxhighlighter .line {
   white-space: pre-wrap !important; /* make code wrap */
