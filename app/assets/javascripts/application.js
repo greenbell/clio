@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap.min
+//= require bootstrap
 
 function exec_sort(form, order) {
   $("#"+form+" input[name='sort']").val(order);

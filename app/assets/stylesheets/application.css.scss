@@ -1,0 +1,14 @@
+@import "bootstrap";
+@import "bootstrap/theme";
+
+body .syntaxhighlighter .line {
+  white-space: pre-wrap !important; /* make code wrap */
+}
+
+
+.table-double-striped > tbody > tr:nth-child(4n) > td,
+.table-double-striped > tbody > tr:nth-child(4n) > th,
+.table-double-striped > tbody > tr:nth-child(4n-1) > td,
+.table-double-striped > tbody > tr:nth-child(4n-1) > th {
+    background-color: #f9f9f9;
+}

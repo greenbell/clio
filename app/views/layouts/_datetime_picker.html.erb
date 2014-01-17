@@ -4,12 +4,12 @@
     <%= text_field_tag :datetime, params[:datetime] || (Time.now - minute.minute).strftime("%Y/%m/%d %H:%M"), :id => "datetime_picker", :class => "form-control" %>
     <span class="input-group-addon">から<%= minute %>分間</span>
   </div>
-    <script type="text/javascript">
-      $(function () {
-        $('#datetime_picker').datetimepicker({
-          language: "ja",
-          format: "YYYY/MM/DD HH:mm"
-        });
+  <script type="text/javascript">
+    $(function () {
+      $('#datetime_picker').datetimepicker({
+        language: "ja",
+        format: "YYYY/MM/DD HH:mm"
       });
-    </script>
+    });
+  </script>
 </div>

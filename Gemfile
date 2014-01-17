@@ -13,6 +13,8 @@ gem 'capistrano', '~> 2.15.4'
 gem 'capistrano-ext'
 gem 'therubyracer'
 gem 'unicorn'
+gem 'sass-rails', '>= 3.2'
+gem 'bootstrap-sass', '~> 3.0.3.0'
 group :doc do
   gem 'sdoc', require: false
 end
