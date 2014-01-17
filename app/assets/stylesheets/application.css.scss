@@ -4,6 +4,10 @@
 @import "shCore";
 @import "shThemeDefault";
 
+td {
+  word-break: break-all;
+}
+
 body .syntaxhighlighter .line {
   white-space: pre-wrap !important; /* make code wrap */
 }
