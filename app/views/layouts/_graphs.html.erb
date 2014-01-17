@@ -8,7 +8,11 @@
   <div class="tab-content">
   <% graphs.each_with_index do |graph, i| %>
     <%= content_tag :div, :class => "tab-pane#{" active" if i == 0}", :id => graph.id do %>
-      <%= image_tag graph.dataurl %>
+      <% if graph.dataurl %>
+        <%= image_tag graph.dataurl %>
+      <% else %>
+        No Graph
+      <% end %>
     <% end %>
   <% end %>
   </div>

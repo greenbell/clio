@@ -43,7 +43,8 @@ class Graph
       }
       self
     rescue OpenURI::HTTPError
-      nil
+      @dataurl = nil
+      self
     end
   end
 

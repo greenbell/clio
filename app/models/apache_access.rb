@@ -37,7 +37,6 @@ class ApacheAccess
                          .select_service(params[:session])
                          .select_section("apache.access")
                          .get_graph("all", :t => "sh")
-    graphs.delete(nil)
     graphs
   end
 

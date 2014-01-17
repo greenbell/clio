@@ -35,7 +35,6 @@ class MysqlSlow
                          .select_service(params[:session])
                          .select_section("mysql.slow")
                          .get_graph("all", :t => "sh")
-    graphs.delete(nil)
     graphs
   end
 

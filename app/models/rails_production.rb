@@ -11,9 +11,8 @@ class RailsProduction
     graphs = []
     if params[:filter]
       if params[:filter][:server_name].present? && params[:filter][:app].present?
-        graphs.push Graph.new.set_name(params[:filter][:server_name])
-                             .set_id("server")
-                             .change_api("complex/graph")
+        graphs.push Graph.new.set_name("#{params[:filter][:server_name]}.#{params[:filter][:app]}")
+                             .set_id("server-app")
                              .select_service(params[:session])
                              .select_section("rails.production")
                              .get_graph("#{params[:filter][:server_name]}.#{params[:filter][:app]}")
@@ -21,6 +20,7 @@ class RailsProduction
       if params[:filter][:app].present?
         graphs.push Graph.new.set_name(params[:filter][:app])
                              .set_id("app")
+                             .change_api("complex/graph")
                              .select_service(params[:session])
                              .select_section("rails.production")
                              .get_graph(params[:filter][:app])
@@ -34,13 +34,6 @@ class RailsProduction
                              .get_graph(params[:filter][:server_name])
       end
     end
-    graphs.push Graph.new.set_name("全サーバー")
-                         .set_id("all")
-                         .change_api("complex/graph")
-                         .select_service(params[:session])
-                         .select_section("rails.production")
-                         .get_graph("all")
-    graphs.delete(nil)
     graphs
   end
 

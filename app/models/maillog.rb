@@ -28,7 +28,6 @@ class Maillog
                          .select_service(params[:session])
                          .select_section("maillog")
                          .get_graph("all", :t => "sh")
-    graphs.delete(nil)
     graphs
   end
 
