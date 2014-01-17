@@ -1,6 +1,6 @@
 <div class="form-group">
   <label>時間帯:</label>
-  <div class="input-group">
+  <div class="input-group" style="width:250px;display:inline-table">
     <%= text_field_tag :datetime, params[:datetime] || (Time.now - minute.minute).strftime("%Y/%m/%d %H:%M"), :id => "datetime_picker", :class => "form-control" %>
     <span class="input-group-addon">から<%= minute %>分間</span>
   </div>

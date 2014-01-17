@@ -12,8 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery.turbolinks
 //= require bootstrap
+//= require moment
+//= require bootstrap-datetimepicker.min
+//= require shCore
+//= require shBrushSql
+//= require shInit
+//= require turbolinks
 
 function exec_sort(form, order) {
   $("#"+form+" input[name='sort']").val(order);
