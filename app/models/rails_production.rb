@@ -10,6 +10,14 @@ class RailsProduction
   def self.get_graphs(params)
     graphs = []
     if params[:filter]
+      if params[:filter][:server_name].present? && params[:filter][:app].present?
+        graphs.push Graph.new.set_name(params[:filter][:server_name])
+                             .set_id("server")
+                             .change_api("complex/graph")
+                             .select_service(params[:session])
+                             .select_section("rails.production")
+                             .get_graph("#{params[:filter][:server_name]}.#{params[:filter][:app]}")
+      end
       if params[:filter][:app].present?
         graphs.push Graph.new.set_name(params[:filter][:app])
                              .set_id("app")
