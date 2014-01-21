@@ -15,7 +15,7 @@ class Graph
   end
 
   def select_service(service_name)
-    @service = service_name
+    @service = service_name || "log"
     self
   end
 
