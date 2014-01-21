@@ -1,19 +1,19 @@
-<% if graphs %>
-  サーバー名やアプリ名クリックでグラフが追加されます
-  <ul class="nav nav-tabs">
-  <% graphs.each_with_index do |graph, i| %>
-    <li<%= raw ' class="active"' if i == 0 %>><a href="#<%= graph.id %>" data-toggle="tab"><%= graph.name %></a></li>
-  <% end %>
-  </ul>
-  <div class="tab-content">
-  <% graphs.each_with_index do |graph, i| %>
-    <%= content_tag :div, :class => "tab-pane#{" active" if i == 0}", :id => graph.id do %>
-      <% if graph.dataurl %>
-        <%= image_tag graph.dataurl %>
-      <% else %>
-        No Graph
-      <% end %>
-    <% end %>
-  <% end %>
-  </div>
-<% end %>
+<%- unless current_page?(:controller => "top", :action => "index") -%>
+  サーバー名やアプリ名で絞りこむとグラフが追加されます
+<%- end -%>
+<ul class="nav nav-tabs">
+<%- graphs.each_with_index do |graph, i| -%>
+  <li<%= raw ' class="active"' if i == 0 %>><a href="#<%= graph.id %>" data-toggle="tab"><%= graph.name %></a></li>
+<%- end -%>
+</ul>
+<div class="tab-content">
+<%- graphs.each_with_index do |graph, i| -%>
+  <%= content_tag :div, :class => "tab-pane#{" active" if i == 0}", :id => graph.id do %>
+    <%- if graph.dataurl -%>
+      <%= image_tag graph.dataurl %>
+    <%- else -%>
+      No Graph
+    <%- end -%>
+  <%- end -%>
+<%- end -%>
+</div>

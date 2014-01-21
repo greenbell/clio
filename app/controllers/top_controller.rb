@@ -2,8 +2,9 @@
 
 class TopController < ApplicationController
   def index
-    @apache_access_logs = ApacheAccess.set_session("default").desc(:time).limit(5)
-    @mysql_slow_logs = MysqlSlow.set_session("default").desc(:time).limit(5)
-    @maillog_logs = Maillog.set_session("default").desc(:time).limit(5)
+    @apache_access_graphs = ApacheAccess.get_graphs(params)
+    @rails_production_graphs = RailsProduction.get_graphs(params)
+    @mysql_slow_graphs = MysqlSlow.get_graphs(params)
+    @maillog_graphs = Maillog.get_graphs(params)
   end
 end
