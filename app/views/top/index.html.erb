@@ -1,12 +1,12 @@
 <h1>Overview</h1>
 <h2><a href="apache_access">apache.access</a></h2>
-<%= render "layouts/graphs", :graphs => @apache_access_graphs %>
+<%= render "layouts/graphs", :graphs => @apache_access_graphs, :prefix => "_1" %>
 
 <h2><a href="rails_production">rails.production</a></h2>
-<%= render "layouts/graphs", :graphs => @rails_production_graphs %>
+<%= render "layouts/graphs", :graphs => @rails_production_graphs, :prefix => "_2" %>
 
 <h2><a href="mysql_slow">mysql.slow</a></h2>
-<%= render "layouts/graphs", :graphs => @mysql_slow_graphs %>
+<%= render "layouts/graphs", :graphs => @mysql_slow_graphs, :prefix => "_3" %>
 
 <h2><a href="maillog">maillog</a></h2>
-<%= render "layouts/graphs", :graphs => @maillog_graphs %>
+<%= render "layouts/graphs", :graphs => @maillog_graphs, :prefix => "_4" %>

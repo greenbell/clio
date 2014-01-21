@@ -3,12 +3,12 @@
 <%- end -%>
 <ul class="nav nav-tabs">
 <%- graphs.each_with_index do |graph, i| -%>
-  <li<%= raw ' class="active"' if i == 0 %>><a href="#<%= graph.id %>" data-toggle="tab"><%= graph.name %></a></li>
+  <li<%= raw ' class="active"' if i == 0 %>><a href="#<%= graph.id %><%= prefix if defined? prefix %>" data-toggle="tab"><%= graph.name %></a></li>
 <%- end -%>
 </ul>
 <div class="tab-content">
 <%- graphs.each_with_index do |graph, i| -%>
-  <%= content_tag :div, :class => "tab-pane#{" active" if i == 0}", :id => graph.id do %>
+  <%= content_tag :div, :class => "tab-pane#{" active" if i == 0}", :id => "#{graph.id}#{prefix if defined? prefix}" do %>
     <%- if graph.dataurl -%>
       <%= image_tag graph.dataurl %>
     <%- else -%>
