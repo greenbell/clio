@@ -27,6 +27,6 @@ function exec_sort(form, order) {
 }
 
 function exec_filter(form, item, value) {
-  $("#"+form+" input[name='filter["+item+"]']").val(value);
+  $("#"+form+" #filter_"+item).val(value);
   $("#"+form).submit();
 }

@@ -13,9 +13,9 @@
       </label>
       <%= select_tag :method, options_for_select([["全て", ""], ["GET", "get"], ["POST", "post"], ["PUT", "put"], ["DELETE", "delete"], ["OPTIONS", "options"]], params[:method] || ""), :class => "form-control" %>
     </div>
+    <%= render "layouts/server_selector" %>
     <%= hidden_field_tag "sort", params[:sort] || "" %>
 
-    <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
     <%= hidden_field_tag "filter[host]", (params[:filter])? params[:filter][:host]: "" %>
     <%= hidden_field_tag "filter[vhost]", (params[:filter])? params[:filter][:vhost]: "" %>
     <%= hidden_field_tag "filter[user]", (params[:filter])? params[:filter][:user]: "" %>

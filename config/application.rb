@@ -23,5 +23,62 @@ module Clio
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.servers = lambda { |session|
+      case session
+      when nil
+        [
+          "gateway1",
+          "gateway2",
+          "admin1",
+          "admin2",
+          "web3",
+          "web4",
+          "web5",
+          "my-style-api1",
+          "my-style-api2",
+          "mail1",
+          "mail2",
+          "night-admin",
+          "night-admin2",
+          "night-web1",
+          "night-web2",
+          "night-web3",
+          "night-web4",
+          "night-style-api1",
+          "night-style-api2",
+          "proxy1",
+          "proxy2",
+          "night-proxy1",
+          "night-proxy2",
+          "master1",
+          "master2",
+          "slave3",
+          "slave4",
+          "slave5",
+          "slave6",
+          "slave7",
+          "slave8"
+        ]
+      when "staging"
+        [
+          "staging-proxy",
+          "staging-admin",
+          "staging-gateway",
+          "staging-web",
+          "staging-web2",
+          "staging-master",
+          "staging-slave"
+        ]
+      when "nightly"
+        [
+          "nightly-ns",
+          "nightly-my",
+          "nightly-night",
+          "nightly-img",
+          "nightly-nsorg"
+        ]
+      end
+    }
   end
 end

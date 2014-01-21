@@ -1,0 +1,4 @@
+<div class="form-group">
+  <label>サーバー名:</label>
+  <%= select_tag "filter[server_name]", options_for_select(Clio::Application.config.servers.call(params[:session]), (params[:filter][:server_name] if params[:filter])), :class => "form-control", :include_blank => true %>
+</div>

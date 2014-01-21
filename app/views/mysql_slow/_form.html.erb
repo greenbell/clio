@@ -1,9 +1,9 @@
 <div>
   <%= form_tag request.path_info, :id => "mysql_slow_form", :class => "form-inline", :role => "form", :method => "GET" do |f| %>
     <%= render "layouts/datetime_picker", :minute => 60 %>
+    <%= render "layouts/server_selector" %>
     <%= hidden_field_tag "sort", params[:sort] || "" %>
 
-    <%= hidden_field_tag "filter[server_name]", (params[:filter])? params[:filter][:server_name]: "" %>
     <%= hidden_field_tag "filter[host]", (params[:filter])? params[:filter][:host]: "" %>
     <%= hidden_field_tag "filter[host_ip]", (params[:filter])? params[:filter][:host_ip]: "" %>
     <%= hidden_field_tag "filter[user]", (params[:filter])? params[:filter][:user]: "" %>
