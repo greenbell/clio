@@ -32,7 +32,7 @@ module RailsAppHelper
         end
       }
       span += "'>"
-      "#{span}#{content}</b></span>"
+      "#{span}#{content.sanitize('html')}</b></span>"
     }
     data
   end
