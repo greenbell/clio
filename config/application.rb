@@ -45,6 +45,7 @@ module Clio
           "night-web2",
           "night-web3",
           "night-web4",
+          "night-web5",
           "night-style-api1",
           "night-style-api2",
           "proxy1",
